@@ -1,0 +1,117 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{形式理论}
+\subsection{Hilbert空间}
+量子理论是建立在两个基础概念上的: \tbf{波函数}和\tbf{算符}.体系的\tbf{状态}由其波函数表示, \tbf{可观察量}用算符来表示.在数学上,我们可以将波函数视作矢量,算符视作作用于矢量上的线性变换,因此量子力学的自然语言是线性代数.\\
+\indent 和一般的有限维向量不同,所有波函数的的集合构成了一个无限维的向量空间.当然,为了表示一个可能的物理状态,波函数$\mathbfit{\Psi}$必须是归一化的.为此,考虑在一个特定的区间$[a,b]$(通常是$(-\infty,+\infty)$)内所有平方可积函数的集合.这种空间是一个Hilbert空间.
+\begin{definition}[Hilbert空间]
+    完备的内积空间称作\tbf{Hilbert空间}.
+\end{definition}
+前面所述的空间的内积定义如下:
+\begin{definition}[波函数空间的内积]
+    波函数空间上的内积定义为
+    \[\left\langle f|g\right\rangle=\int_{a}^{b}f^\ast(x)g(x)\di x\]
+\end{definition}
+如果一个函数$f$与自身的内积为$1$,就称该函数是\tbf{归一化的}.如果两个函数的内积为$0$,就称这两个函数是\tbf{正交的}.如果一组函数$\{f_n\}$既是归一的又互相正交,那么称它们\tbf{正交归一}.如果一组函数$\{f_n\}$是Hilbert空间的基(及其延伸组),那么称这组函数是\tbf{完备}的.
+\subsection{可观测量}
+\subsubsection{Hermitian算符}
+引入Hilbert空间及其上的内积后,可观测量$Q(x,p)$的期望值可以简单地用内积符号表示:
+\[\avg{Q}=\int\iPsi^\ast\hat{Q}\iPsi\di x=\inprod{\iPsi}{\hat{Q}\iPsi}\]
+一次测量的结果应当是实数,因此
+\[\avg{Q}=\avg{Q}^\ast\]
+而内积的复共轭等于交换参与内积的两个函数形成的内积,因此
+\[\inprod{\iPsi}{\hat{Q}\iPsi}=\inprod{\hat{Q}\iPsi}{\iPsi}\]
+可观测量对应的算符都应满足上述性质,它们有一个特殊的名字:
+\begin{definition}[Hermitian算符]
+    对任意波函数$f$都有\[\inprod{f}{\hat{Q}f}=\inprod{\hat{Q}f}{f}\]的算符$\hat{Q}$被称作\tbf{厄米(Hermitian)算符}.
+\end{definition}
+\subsubsection{定态}
+一般而言,对一组全同的系统组成的系综中对可观测量$Q$进行测量时,即使每个系统都处于相同的状态$\iPsi$,每次测量也会得到不同的结果,这就是量子力学的不确定性.\\
+\indent 问题在于,是否存在一个状态使得每一次对$Q$的测量都能得到同样的值?换言之,这样的状态$\iPsi$被称作可观测量$Q$的一个\tbf{定态}.在定态下, $Q$的标准差应当是$0$,也就是
+\[\sigma^2=\avg{\left(Q-\avg{Q}\right)^2}=\inprod{\iPsi}{\left(\hat{Q}-q\right)^2\iPsi}=\inprod{\left(\hat{Q}-q\right)\iPsi}{\left(\hat{Q}-q\right)\iPsi}=0\]
+于是
+\[\hat{Q}\iPsi=q\iPsi\]
+\begin{definition}[本征值]
+    算符$\hat{Q}$的\tbf{本征函数}$\iPsi$是满足
+    \[\hat{Q}\iPsi=q\iPsi\]
+    的函数, $q$成为对应于该本征函数的\tbf{本征值}.
+\end{definition}
+\begin{definition}[谱和简并]
+    算符的所有本征值的集合称作算符的\tbf{谱}.如果同一本征值对应了线性无关的本征函数,这称作谱的\tbf{简并}.
+\end{definition}
+\subsection{厄米算符的本征函数}
+现在,我们把注意力放在厄米算符的本征函数上,即可观测量具有确定值的状态.这可以分为两种情况:如果谱是离散的,那么本征函数就在Hilbert空间中并且构成物理上可以实现的态;如果谱是连续的,那么本征函数就不可归一化,并且它们无法代表可能实现的波函数.
+\subsubsection{离散谱}
+在数学上,厄米算符的可归一化的本征函数具有两个重要特征:
+\begin{theorem}[厄米算符的本征函数的性质]
+    厄米算符的可归一化的本征函数对应的本征值是实数,并且对应于不同本征值的本征函数是正交的.
+\end{theorem}
+\begin{proof}
+    设厄米算符$\hat{Q}$和Hilbert空间内的函数$f$使得
+    \[\hat{Q}f=qf\]
+    于是
+    \[\inprod{f}{\hat{Q}f}=\inprod{\hat{Q}f}{f}\]
+    于是
+    \[q\inprod ff=q^\ast\inprod ff\]
+    因为$f\neq0$,于是$q=q^\ast$,则$q\in\R$.\\
+    后一点是容易证明的,可以类比对应于不同特征值的特征向量必然正交来证明.
+\end{proof}
+在有限维向量空间中,厄米矩阵的特征向量组构成这一空间的基.然而,在无限维的Hilbert空间中,这一性质不能推广,然而这个性质对量子力学内在的自洽性是非常必要的,所以遵从狄拉克的论述,我们给出如下的公理:
+\begin{theorem}
+    可观测量算符的本征函数是完备的,在Hilbert空间中的任何函数都可以用它们的线性组合来表示.
+\end{theorem}
+\subsubsection{连续谱}
+如果厄米算符的谱是连续的,其本征函数就是不可归一化的,前面的证明也就不能成立.尽管如此,在某种意义上前面三个基本的性质仍然能成立.
+\begin{problem}
+    在$-\infty<x<\infty$的区间上求动量算符的本征值和本征函数.
+\end{problem}
+\begin{solution}
+    设$f_p(x)$是$\hat{p}$的本征函数,本征值为$p$,则有
+    \[-\i\hbar\dfrac{\di}{\di x}f_p(x)=pf_p(x)\]
+    这一方程的通解为
+    \[f_p(x)=A\exp\left(\dfrac{\i px}{\hbar}\right)\]
+    如果$p$是复数,那么上述函数中就会出现$\e^{kx}$项,这会使得$f_p(x)$不能平方可积.看来动量算符在希尔伯特空间中没有本征函数.\\
+    然而,如果限定本征值为实数的情况下,就可以有
+    \[\int_{-\infty}^{\infty}f^\ast_{p'}(x)f_p(x)\di x=|A|^2\int_{-\infty}^{\infty}\exp\left(\dfrac{\i(p-p')x}{\hbar}\right)\di x=|A|^22\pi\hbar\delta(p-p')\]
+    取$A=\dfrac{1}{\sqrt{2\pi\hbar}}$则有
+    \[f_p(x)=\dfrac{1}{\sqrt{2\pi\hbar}}{\exp\left(\dfrac{\i px}{\hbar}\right)}\]
+    并且
+    \[\inprod{f_{p'}}{f_p}=\delta(p-p')\]
+    这几乎就是正交归一性的表述,除了把克罗内克$\delta$符号替换成了狄拉克$\delta$函数.这一性质被称作\tbf{狄拉克正交归一性}.\\
+    更重要的是,此时动量算符的对应于实数本征值的本征函数是完备的.由于谱的连续性,应当把线性组合替换为积分,这样对于任意平方可积的函数$f(x)$都有
+    \[f(x)=\int_{-\infty}^{\infty}c(p)f_p(x)\di p=\dfrac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}c(p)\exp\left(\dfrac{\i px}{\hbar}\right)\di p\]
+    并且展开的系数$c(p)$可以通过傅里叶变换得到:
+    \[c(p')=\int_{-\infty}^{\infty}c(p)\delta(p-p')\di p=\int_{-\infty}^{\infty}c(p)\inprod{f_{p'}}{f_p}\di p=\inprod{f_{p'}}{f}\]
+\end{solution}
+这样,我们就得到动量本征函数$f_p$,它是波长$\lambda=\dfrac{2\pi\hbar}{p}$的正弦波.
+\subsection{广义统计诠释}
+我们在前面的章节介绍了波函数的实际含义,以及可观测量的确定方法.这些内容可以描述为:
+\begin{theorem}[广义统计诠释]
+    如果对处于$\iPsi(x,t)$状态粒子的可观测量$Q(x,p)$进行测量,那么一定会得到厄米算符$\hat{Q}$的某个本征值.如果$\hat{Q}$的谱是离散的,那么得到与本征函数$\psi_n(x)$相应的本征值$q_n$的概率为$\left|\inprod{\psi_n}{\iPsi}\right|^2$;如果$\hat{Q}$的谱是连续的,并且具有实的本征值$q(z)$,那么结果的概率密度函数为$\rho(z)=\left|\inprod{\psi_z}{\iPsi}\right|^2$.
+\end{theorem}
+在进行测量后,波函数\tbf{坍缩}为相应的本征态.在连续谱的情况下,坍缩是朝向测量值的一个狭窄的范围,取决于仪器的精度.\\
+\indent 总的几率当然也是归一化的.这源于波函数的归一化.对于离散谱有
+\[\begin{aligned}
+    1
+    &=\inprod{\iPsi}{\iPsi}=\inprod{\left(\sum_{n'}c_{n'}f_{n'}\right)}{\left(\sum_{n}c_{n}f_{n}\right)}=\sum_{n'}\sum_{n}c_{n'}^\ast c_{n}\inprod{f_{n'}}{f_n}\\
+    &=\sum_{n'}\sum_{n}c_{n'}^\ast c_{n}\delta_{n'n}=\sum_{n}c_n^\ast c_n=\sum_{n}\left|c_n\right|^2
+\end{aligned}\]
+对于$Q$的期望值也可以得出符合前面章节的结果.\\
+\indent 对于连续谱,也可以用广义统计诠释得到我们最初的论述.对于位置$x$,我们知道每个实数$y$都是位置算符$\hat{x}$的本征值,相应的本征函数$g_y(x)=\delta(x-y)$.于是系数$c(y)$为
+\[c(y)=\inprod{g_y}{\iPsi}=\int_{-\infty}^{+\infty}\delta(x-y)\iPsi(x,t)\di x=\Psi(y,t)\]
+从而概率密度函数$\rho(y)=\left|\iPsi(y,t)\right|^2$.\\
+\indent 而对于动量$p$,动量算符$\hat{p}$的本征函数为
+\[f_p(x)=\dfrac{1}{\sqrt{2\pi\hbar}}\exp\left(\dfrac{\i px}{\hbar}\right)\]
+其系数为
+\[c(p)=\inprod{f_p}{\iPsi}=\dfrac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{+\infty}\exp\left(-\dfrac{\i px}{\hbar}\right)\iPsi(x,t)\di x\]
+这是一个非常重要的物理量:
+\begin{definition}[动量空间波函数]
+    动量空间波函数
+\end{definition}
+\end{document}

@@ -1,0 +1,313 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{定态薛定谔方程}
+\subsection{定态}
+\subsubsection{变分法解薛定谔方程}
+我们在第一章对波函数进行了简单的讨论,包括如何用它计算粒子的各种物理量.现在应当考虑更前面的一个问题:如何根据给定的$V(x,t)$求解薛定谔方程得到$\iPsi(x,t)$.一般的情况下, $V$通常与时间$t$无关.此时,我们可以采用\tbf{变分法}\footnote{分离变量法(seperation of variables)}求解薛定谔方程.假定所求的$\iPsi(x,t)$具有如下形式\footnote{表面上看,这一假定是不大合理的,但我们在之后能知道用这一方法求出的解非常有意义.}:
+\[\iPsi(x,t)=\psi(x)\varphi(t)\]
+于是有
+\[\dfrac{\p\iPsi}{\p t}=\psi\dfrac{\di\varphi}{\di t},\quad\dfrac{\p^2\Psi}{\p x^2}=\dfrac{\di^2\psi}{\di x^2}\varphi\]
+将上式代入薛定谔方程可得
+\[\i\hbar\psi\dfrac{\di\varphi}{\di t}=-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}\varphi+V\psi\varphi\]
+两边同时除以$\psi\varphi$可得
+\[\i\hbar\dfrac{1}{\varphi}\dfrac{\di\varphi}{\di t}=-\dfrac{\hbar^2}{2m}\dfrac{1}{\psi}\dfrac{\di^2\psi}{\di x^2}+V\]
+我们现在来看这个式子.左边仅是$t$的函数,右边仅是$x$的函数.这样的方程成立当且仅当左右两边都等于一个常数\footnote{须知上述对任意$x,t$都成立,因此固定其中一个变量而改变另外一个变量就可以说明这一结论.}.我们令这一常数为$E$(后面我们将证明$E$一定是实数),从而有
+\[\left\{\begin{array}{l}
+    \dfrac{\di\varphi}{\di t}=-\dfrac{\i E}{\hbar}\varphi\\[6pt]
+    -\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}+V\psi=E\psi
+\end{array}\right.\]
+变分法将一个偏微分方程变成两个常微分方程.第一个方程的解是容易的:
+\[\varphi(t)=\exp\left(-\dfrac{\i Et}{\hbar}\right)\]
+第二个方程称作\tbf{定态薛定谔方程},它的解依$V(x)$而定.
+\subsubsection{变分法的理由}
+在求解定态薛定谔方程之前,我们不妨考虑一下进行变分法的合理性.这主要有三个理由:
+\begin{enumerate}[label=\tbf{\arabic*.},leftmargin=*]
+    \item 变分法解得的波函数是定态的.尽管
+    \[\iPsi(x,t)=\psi(x)\exp\left(-\dfrac{\i Et}{\hbar}\right)\]
+    随时间变化,但是
+    \[\left|\iPsi(x,t)\right|^2=\iPsi\iPsi^\ast=\psi\exp\left(-\dfrac{\i Et}{\hbar}\right)\psi^\ast\exp\left(\dfrac{\i Et}{\hbar}\right)=\psi\psi^\ast=\left|\psi(x)\right|^2\]
+    这样,在计算任意物理量$Q(x,p)$的期望值时,总有
+    \[\avg{Q(x,p)}=\int\psi^\ast Q(x,-\i\hbar\dfrac{\d}{\di x})\psi\di x\]
+    与$t$无关.我们不妨把$\varphi(t)$去掉,简单地用$\psi$代替$\iPsi$.
+    \item 变分法解得的波函数总是具有确定总能量的态.在经典力学中,总能量(动能与势能的和)称为\tbf{哈密顿量(Hamiltonian)}:
+    \[H(x,p)=\dfrac{p^2}{2m}+V(x)\]
+    相应地,在量子力学中哈密顿量的算符为
+    \[\hat{H}=-\dfrac{\hbar^2}{2m}\dfrac{\p^2}{\p x^2}+V(x)\]
+    这样,定态薛定谔方程就可以写为
+    \[\hat{H}\psi=E\psi\]
+    于是
+    \[\avg{H}=\int\psi^\ast\hat{H}\psi\di x=\int\psi^\ast E\psi\di x=E\int\psi^\ast\psi\di x=E\]
+    另外
+    \[\hat{H}^2\psi=\hat{H}(E\psi)=E\hat{H}\psi=E^2\psi\]
+    于是
+    \[\avg{H^2}=\int\psi^\ast\hat{H}^2\psi\di x=E^2\int\psi^\ast\psi\di x=E^2\]
+    因此$H$的标准差为
+    \[\sigma_{H}^2=\avg{H^2}-\avg{H}^2=E^2-E^2=0\]
+    于是分离变量的解具有这样一种性质\footnote{这也是为什么将分离常数用$E$标记的原因.}:每次对总能量测量结果的值都是确定的$E$.
+    \item 通解是分离变量解的线性组合.一般而言,定态薛定谔方程给出一个无限的解集$\psi_1(x),\psi_2(x),\cdots$,每一个解都有相应的分离变量常数$E_1,E_2,\cdots$.变分法解得的含时薛定谔方程具有这样一个特性:方程的不同解的线性组合仍是其本身的一个解,即
+    \[\iPsi(x,t)=\sum_{n=1}^{\infty}c_n\psi_n(x)\exp\left(-\dfrac{\i E_nt}{\hbar}\right)\]
+    我们在之后将会知道, $|c_n|^2$是进行一次测量测得能量为$E_n$的几率,并且总有$\displaystyle\sum_{n=1}^{\infty}|c_n|^2=1$.能量$H$的平均值即为
+    \[\avg{H}=\sum_{n=1}^{\infty}|c_n|^2E_n\]
+\end{enumerate}
+\subsubsection{例题与引理}
+\begin{theorem}
+    对于归一化的解,其分离变量常数$E$一定是实数.
+\end{theorem}
+\begin{proof}
+    考虑$E=E_0+\i\iGamma$,其中$E_0$, $\iGamma\in\R$.变分法的解为
+    \[\iPsi(x,t)=\psi(x)\exp\left(-\dfrac{\i E_0t}{\hbar}+\dfrac{\iGamma t}{\hbar}\right)\]
+    于是
+    \[\left|\iPsi(x,t)\right|^2=\psi\exp\left(-\dfrac{\i E_0t}{\hbar}\right)\exp\left(\dfrac{\iGamma t}{\hbar}\right)\psi^\ast\exp\left(\dfrac{\i E_0t}{\hbar}\right)\exp\left(\dfrac{\iGamma t}{\hbar}\right)=\left|\psi(x)\right|^2\exp\left(\dfrac{2\iGamma t}{\hbar}\right)\]
+    而归一化条件要求对任意$t$总有
+    \[\int\left|\iPsi(x,t)\right|\di x=\int\left|\psi(x)\right|^2\exp\left(\dfrac{2\iGamma t}{\hbar}\right)\di x=\exp\left(\dfrac{2\iGamma t}{\hbar}\right)\int\left|\psi(x)\right|^2\di x=1\]
+    这要求$\exp\left(\dfrac{2\iGamma t}{\hbar}\right)$是常数,于是总有$\iGamma=0$.
+\end{proof}
+\begin{theorem}
+    定态波函数$\psi(x)$总可以取做实函数.
+\end{theorem}
+\begin{proof}
+    首先,这一命题的含义并非所有定态薛定谔方程的解一定是实函数,而是如果某一个解$\psi(x)$对应能量$E$, 那么总可以构造一个实函数$\phi(x)$使得它也对应于能量$E$.首先对薛定谔方程
+    \[-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}+V\psi=E\psi\]
+    两边取复共轭可得
+    \[-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi^\ast}{\di x^2}+V\psi^\ast=E\psi^\ast\]
+    这意味着$\psi^\ast$也是对应于能量$E$的解.令$\phi=\psi+\psi^\ast$,这是两个解的线性组合,因而也是方程的解.
+\end{proof}
+\begin{theorem}
+    对于定态薛定谔方程的每一个归一化解, $E$必须大于$V(x)$的最小值.
+\end{theorem}
+\begin{proof}
+    我们有
+    \[E=\avg{H}=\avg{\dfrac{p^2}{2m}}+\avg{V(x)}\geq\avg{V(x)}\geq V_{\min}\]
+\end{proof}
+\subsection{无限深方势阱}
+我们考虑一种典型的情形:
+\[V(x)=\left\{\begin{array}{l}
+    0,\quad0\leq x\leq a\\
+    \infty,\quad\text{其它情况}
+\end{array}\right.\]
+粒子在这样的势场中运动,除了在两个端点以外都是自由的,在端点处存在无穷大的力阻止它逃逸.\\
+\indent 现在我们来考虑这一体系下粒子的波函数.在势阱以外, $\psi(x)=0$(也即在那里发现粒子的几率为$0$),而在势阱内定态薛定谔方程为
+\[-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}=E\psi\]
+我们已经知道$E\geq V_{\min}=0$,于是则有
+\[\dfrac{\di^2\psi}{\di x^2}=-k^2\psi,\quad k=\dfrac{\sqrt{2mE}}{\hbar}\]
+上述微分方程的通解为
+\[\psi(x)=A\sin kx+B\cos kx\]
+其中$A$, $B$为任意常数,需要根据边界条件确定.一般而言, $\psi$和$\dfrac{\di\psi}{\di x}$都是连续的,但是在势函数$V(x)$无穷大的地方只有第一个边界条件适用. $\psi(x)$的连续性要求
+\[\psi(0)=\psi(a)=0\]
+于是
+\[\psi(0)=B=0,\quad \psi(a)=A\sin kx=0\]
+如果$A=0$,那么$\psi(x)=0$,这是不可归一化的.这就意味着$\sin ka=0$,于是
+\[k_n=\dfrac{n\pi}{a},\quad n=1,2,\cdots\]
+注意$k=0$时$\psi(x)=0$,也是不可归一化的.\\
+\indent 然后根据归一化条件可得
+\[\int_0^a\left|A\right|^2\sin^2(kx)\di x=\left|A\right|^2\dfrac{a}{2}=1\]
+我们简单地将$A$取做其模长,即$A=\sqrt{\dfrac{2}{a}}$.这样,无限深方势阱内的定态薛定谔方程的解为
+\[\psi_n(x)=\sqrt{\dfrac{2}{a}}\sin\left(\dfrac{n\pi}{a}x\right)\]
+\indent 如前所述,方程的解是一个无限的解集, $\psi_n(x)$对应的能量$E=\dfrac{n^2\pi^2\hbar^2}{2ma^2}$,并且容易证明它是$C[0,a]$的规范正交基.
+\subsection{谐振子}
+\subsubsection{谐振子模型}
+经典谐振子模型由一个质量为$m$的物体挂在劲度系数为$k$的弹簧上构成,根据胡克定律有
+\[F=-kx=m\dfrac{\di^2 x}{\di t^2}\]
+它的解为
+\[x(t)=A\sin\omega t+B\cos\omega t,\quad\omega=\sqrt{\dfrac{k}{m}}\]
+势能$V(x)=\dfrac12kx^2$.\\
+\indent 尽管不存在理想的谐振子,但对于任何势能函数$V(x)$,我们总能在其极小值附近用谐振子模型对其近似.考虑$V(x)$在极小值点$x_0$处的泰勒展开:
+\[V(x)=V(x_0)+V'(x_0)(x-x_0)+\dfrac12V''(x_0)(x-x_0)^2+o(x^2)\]
+由于$x_0$是极小值点,因此$V'(x_0)=0$.忽略高次项后就有
+\[V(x)\sim\dfrac12V''(x_0)(x-x_0)^2\]
+这正是谐振子模型所描述的势能函数.现在,我们考虑$V(x)=\dfrac12m\omega^2x^2$的薛定谔方程
+\[-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}+\dfrac12m\omega^2x^2\psi=E\psi\]
+求解此方程可以用幂级数法,这种方法更普适,但是计算更加复杂.我们现在介绍一种更加巧妙的方法,即\tbf{阶梯算符},来解决这一问题.
+\subsubsection{阶梯算符}
+我们将上式改写为
+\[\dfrac{1}{2m}\left[\hat{p}^2+(m\omega x)^2\right]\psi=E\psi\]
+求解方程的基本思想是分解哈密顿算符$\hat{H}=\dfrac{1}{2m}\left[\hat{p}^2+(m\omega x)^2\right]$.如果式子里都是数字,那么这一分解结果很简单\footnote{即$u^2+v^2=(u+v\i)(u-v\i)$.}.然而我们面对的是两个算符,并且通常而言算符是不\tbf{对易}(即不可交换)的.不过尽管如此,我们仍然可以考虑
+\[\hat{a}_{+}=\dfrac{1}{\sqrt{2\hbar m\omega}}(m\omega x-\i\hat{p}),\quad\hat{a}_{-}=\dfrac{1}{\sqrt{2\hbar m\omega}}(m\omega x+\i\hat{p})\]
+于是
+\[\quad\hat{a}_{-}\hat{a}_{+}=\dfrac{1}{2\hbar m\omega}\left[\hat{p}^2+(m\omega x)^2-\i m\omega(x\hat{p}-\hat{p}x)\right]\]
+我们记$[x,\hat{p}]=x\hat{p}-\hat{p}x$为算符$x$和$\hat{p}$的\tbf{对易子}用于衡量这两个算子的不可交换的程度.根据$\hat{p}$的定义有
+\[[x,\hat{p}]f=\left[x\left(-\i\hbar\dfrac{\di f}{\di x}\right)+\i\hbar\dfrac{\di(xf)}{\di x}\right]=\i\hbar f\]
+于是$[x,\hat{p}]=\i\hbar$.
+\begin{theorem}[正则对易关系]
+    位置算符$x$和动量算符$\hat{p}$的对易子为$\i\hbar$.
+\end{theorem}
+利用正则对易关系,我们可以得出
+\[\hat{a}_{-}\hat{a}_{+}=\dfrac{1}{\hbar\omega}\hat{H}+\dfrac12,\quad\hat{a}_{+}\hat{a}_{-}=\dfrac{1}{\hbar\omega}\hat{H}-\dfrac12\]
+现在,对于满足$\hat{H}\psi=E\psi$的$\psi$,我们将$\hat{a}_+$作用其上,则有
+\[\begin{aligned}
+    \hat{H}(\hat{a}_+\psi)
+    &=\hbar\omega\left(\hat{a}_+\hat{a}_-+\dfrac12\right)\hat{a}_+\psi=\dfrac12\hbar\omega(\hat{a}_+\psi)+\hbar\omega\hat{a}_+\hat{a}_-\hat{a}_+\psi\\
+    &=\dfrac12\hbar\omega(\hat{a}_+\psi)+\hbar\omega\hat{a}_+\left(\dfrac{1}{\hbar\omega}\hat{H}+\dfrac12\right)\psi\\
+    &=\hbar\omega(\hat{a}_+\psi)+\hat{a}_+\hat{H}\psi=\hbar\omega(\hat{a}_+\psi)+\hat{a}_+E\psi\\
+    &=(E+\hbar\omega)(\hat{a}_+\psi)
+\end{aligned}\]
+则$\hat{a}_+\psi$是满足$\hat{H}\psi=\left(E+\hbar\omega\right)\psi$的解.类似地可以证明$\hat{a}_-\psi$是能量为$E-\hbar\omega$的解.\\
+\indent 上面这种方法提供了一种很好的生成新的解的方式.我们把$\hat{a}_+$称作\tbf{升算符},把$\hat{a}_-$称作\tbf{降算符}.\\
+\indent 然而,根据前面的讨论, $E<0$的情形是不存在的,所以一定存在某些时刻$\hat{a}_-\psi$是无效的.事实上这正是$\hat{a}_-\psi=0$时.我们不妨假定$\psi_0$满足$\hat{a}_-\psi_0=0$.于是则有
+\[\dfrac{1}{\sqrt{2\hbar m\omega}}\left(\hbar\dfrac{\di}{\di x}+m\omega x\right)\psi_0=0\]
+即
+\[\dfrac{\di\psi_0}{\di x}=-\dfrac{m\omega}{\hbar}x\psi_0\]
+这一微分方程的解为
+\[\psi_0=A\exp\left(-\dfrac{m\omega}{2\hbar}x^2\right)\]
+归一化条件要求
+\[1=\int_{-\infty}^{+\infty}\left|A\right|^2\exp\left(-\dfrac{m\omega}{\hbar}x^2\right)\di x=\left|A\right|^2\sqrt{\dfrac{\pi\hbar}{m\omega}}\]
+于是
+\[\psi_0(x)=\left(\dfrac{m\omega}{\pi\hbar}\right)^{1/4}\exp\left(-\dfrac{m\omega}{2\hbar}x^2\right)\]
+然后根据$E_0\psi_0=\hat{H}\psi_0=\hbar\omega\left(\hat{a}_+\hat{a}_-+\dfrac12\right)\psi_0$可得
+\[E_0=\dfrac12\hbar\omega\]
+\indent 形象地讲,我们现在站在一个梯子的最底部,每对$\psi_0$作用一次$\hat{a}_{+}$就得到高一阶的激发态.重复这一过程,可以构造出谐振子所有的定态\footnote{如果有另外的某些解,反复利用降算符一定可以回到基态,从而它也在这一阶梯上.}.利用升降算符的性质,我们还可以得到各激发态的归一化常数.
+\begin{theorem}
+    谐振子模型的第$n$个激发态$\psi_n$为
+    \[\psi_n(x)=\dfrac{1}{\sqrt{n!}}(\hat{a}_+)^n\psi_0\]
+\end{theorem}
+\begin{proof}
+    首先我们不妨设
+    \[\hat{a}_+\psi_n=c_n\psi_{n+1},\quad\hat{a}_-\psi_n=d_n\psi_{n-1}\]
+    注意到对任意函数$f(x)$和$g(x)$都有
+    \[\int_{-\infty}^{+\infty}f^\ast(\hat{a}_{\pm}g)\di x=\dfrac{1}{\sqrt{2\hbar m\omega}}\int_{-\infty}^{+\infty}f^\ast\left(\mp\hbar\dfrac{\di}{\di x}+m\omega x\right)g\di x\]
+    利用分部积分法可得\footnote{这一积分必须存在,意味着$\displaystyle\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=0$.}
+    \[\int_{-\infty}^{+\infty}f^\ast\dfrac{\di g}{\di x}\di x=\int_{-\infty}^{+\infty}f^\ast g\di x-\int_{-\infty}^{+\infty}\left(\dfrac{\di f}{\di x}\right)^\ast g\di x=-\int_{-\infty}^{+\infty}\left(\dfrac{\di f}{\di x}\right)^\ast g\di x\]
+    所以
+    \[\int_{-\infty}^{+\infty}f^\ast(\hat{a}_{\pm}g)\di x=\dfrac{1}{\sqrt{2\hbar m\omega}}\int_{-\infty}^{+\infty}\left[\left(\pm\hbar\dfrac{\di}{\di x}+m\omega x\right)f\right]^\ast g\di x=\int_{-\infty}^{+\infty}(\hat{a}_{\mp}f^\ast)g\di x\]
+    特别地,有
+    \[\int_{-\infty}^{+\infty}(\hat{a}_{\pm}\psi_n)^\ast(\hat{a}_{\pm}\psi_n)\di x=\int_{-\infty}^{+\infty}(\hat{a}_{\mp}\hat{a}_{\pm}\psi_n)^\ast\psi\di x\]
+    而
+    \[\hat{a}_{+}\hat{a}_{-}\psi_n=\left(\dfrac{1}{\hbar\omega}\hat{H}-\dfrac12\right)\psi_n=\dfrac{1}{\hbar\omega}E_n\psi_n-\dfrac12\psi_n=\dfrac{1}{\hbar\omega}\left(n+\dfrac12\right)\hbar\omega\psi_n-\dfrac12\psi_n=n\psi_n\]
+    \[\hat{a}_{-}\hat{a}_{+}\psi_n=\left(\dfrac{1}{\hbar\omega}\hat{H}+\dfrac12\right)\psi_n=(n+1)\psi_n\]
+    于是
+    \[\left|c_n\right|^2\int_{-\infty}^{+\infty}\left|\psi_{n+1}\right|^2\di x=\int_{-\infty}^{+\infty}(\hat{a}_{+}\psi_n)^\ast(\hat{a}_{+}\psi_n)\di x=\int_{-\infty}^{+\infty}(\hat{a}_{-}\hat{a}_{+}\psi_n)^\ast\psi_n\di x=(n+1)\int_{-\infty}^{+\infty}\left|\psi_n\right|^2\di x\]
+    \[\left|d_n\right|^2\int_{-\infty}^{+\infty}\left|\psi_{n-1}\right|^2\di x=\int_{-\infty}^{+\infty}(\hat{a}_{-}\psi_n)^\ast(\hat{a}_{-}\psi_n)\di x=\int_{-\infty}^{+\infty}(\hat{a}_{+}\hat{a}_{-}\psi_n)^\ast\psi_n\di x=n\int_{-\infty}^{+\infty}\left|\psi_n\right|^2\di x\]
+    由归一化条件可得$c_n=\sqrt{n+1}$, $d_n=\sqrt{n}$.经过简单的递推可得
+    \[\psi_n(x)=\dfrac{1}{\sqrt{n!}}(\hat{a}_+)^n\psi_0\]
+\end{proof}
+\begin{theorem}
+    谐振子模型的第$n$个激发态和第$m$个激发态($n\neq m$)是正交的.
+\end{theorem}
+\begin{proof}
+    我们有
+    \[\begin{aligned}
+        \int_{-\infty}^{+\infty}\psi_m^\ast(\hat{a}_+\hat{a}_-)\psi_n\di x
+        &=n\int_{-\infty}^{+\infty}\psi_m^\ast\psi_n\di x\\
+        &=\int_{-\infty}^{+\infty}(\hat{a}_-\psi_m)^\ast(\hat{a}_-\psi_n)\di x=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}(\hat{a}_+\hat{a}_-\psi_m)^\ast\psi_n\di x\\
+        &=m\int_{-\infty}^{+\infty}\psi_m^\ast\psi_n\di x
+    \end{aligned}\]
+    除非$m=n$,否则总有$\displaystyle\int_{-\infty}^{+\infty}\psi_m^\ast\psi_n=0$.
+\end{proof}
+\subsubsection{解析法}
+现在我们回头用幂级数法解谐振子的薛定谔方程.引入无量纲的变量$\xi=\sqrt{\dfrac{m\omega}{\hbar}}x$,则有
+\[\dfrac{\di^2\psi}{\di\xi^2}=(\xi^2-K)\psi,\quad K=\dfrac{2E}{\hbar\omega}\]
+我们的目标是求解上式并得到$K$的可能值.\\
+\indent 首先,注意到对于很大的$\xi$有$\xi^2\gg K$,于是
+\[\dfrac{\di^2\psi}{\di\xi^2}\sim\xi^2\psi\]
+这一方程的近似解为
+\[\psi(\xi)\sim A\exp\left(-\dfrac{\xi^2}{2}\right)+B\exp\left(\dfrac{\xi^2}{2}\right)\]
+后一项是不能归一化的,因为$|x|\to\infty$时$\psi(\xi)$趋于无限大.于是方程的解应当有渐进的行为
+\[\psi(\xi)=h(\xi)\exp\left(-\dfrac{\xi^2}{2}\right)\]
+并且$h(\xi)$在$x\to\infty$处收敛.这样,薛定谔方程就变为
+\[\dfrac{\di^2 h}{\di\xi^2}-2\xi\dfrac{\di h}{\di\xi}+(K-1)h=0\]
+将$h(\xi)$进行幂级数展开可得
+\[\sum_{j=0}^{\infty}\left[(j+1)(j+2)a_{j+2}-2ja_j+(K-1)a_j\right]\xi^j=0\]
+由幂级数展开的唯一性可得每一项的系数都应当为$0$,于是
+\[(j+1)(j+2)a_{j+2}-2ja_j+(K-1)a_j=0\]
+于是
+\[a_{j+2}=\dfrac{2j+1-K}{(j+1)(j+2)}a_j\]
+只要确定$a_0$与$a_1$,这个递推公式就能确定$h(\xi)$的级数展开的所有系数;我们可以将它分解为一个奇函数和一个偶函数的和.\\
+\indent 然而,并非所有通过上述过程得到的解都是归一化的.对于很大的$j$,递推公式近似为
+\[a_{j+2}\sim\dfrac{2}{j}a_j,\quad a_j\sim\dfrac{C}{j/2}!\]
+对于一些常数$C$,这将导致
+\[h(\xi)=C\sum\dfrac{1}{(j/2)!}\xi^j\sim C\sum\dfrac{1}{j!}\xi^{2j}\sim C\e^{\xi^2}\]
+这将导致$\psi$与$\exp\left(\dfrac{\xi^2}{2}\right)$同阶.这不是我们想要的结果.仅有一种方法摆脱发散的行为:对于归一化的解,级数必须在某一处中断,即存在最高的$j$(不妨记为$n$)使得$a_{n+2}=0$.没有截断的另一部分则从一开始就为零.于是,物理上可接受的解必须满足
+\[2n+1-K=0\]
+也即
+\[E=\left(n+\dfrac12\right)\hbar\omega\]
+我们再一次得到了这一结论.
+\subsection{自由粒子}
+接下来我们讨论在所有的势场中看起来应当是最简单的情形,即自由粒子($V(x)$处处为$0$).在经典力学中这意味着物体将做匀速运动,但在量子力学中就会变得微妙起来.与无限深方势阱中类似地也有
+\[\dfrac{\di^2\psi}{\di x^2}=-k^2\psi,\quad k=\dfrac{\sqrt{2mE}}{\hbar}\]
+这一微分方程的解为(为了更方便地讨论,我们将结果写作复指数的形式)
+\[\psi(x)=A\e^{\i kx}+B\e^{-\i kx}\]
+再加上标准的时间依赖因子$\exp(-\i Et/\hbar)$就有
+\[\iPsi(x,t)=A\exp\left[\i k\left(x-\dfrac{\hbar k}{2m}t\right)\right]+B\exp\left[-\i k\left(x+\dfrac{\hbar k}{2m}t\right)\right]\]
+上式的第一项代表一列向右传播的波,而第二项代表一列向左传播的波.进行简单的合并可得
+\[\iPsi_k(x,t)=A\exp\left[\i\left(kx-\dfrac{\hbar k^2}{2m}t\right)\right],\quad k=\pm\dfrac{\sqrt{2mE}}{\hbar}\]
+\indent 我们马上就会遇到关于这个解的两个问题.首先,对于波长为$\lambda=2\pi/|k|$的波,按照德布罗意公式,其动量$p=\hbar k$.这些波的速度为
+\[v=\dfrac{\hbar|k|}{2m}=\sqrt{\dfrac{E}{2m}}\]
+而经典力学的动能与速度的关系却给出$v=\sqrt{\dfrac{2E}{m}}$.这意味着在速度上出现了矛盾.另一个更为重要的问题是这个波函数无法归一化,因为
+\[\int_{-\infty}^{+\infty}\iPsi_k^\ast\iPsi\di x=|A|^2\int_{-\infty}^{+\infty}\di x=|A|^2(\infty)\]
+于是对于自由粒子而言,分离变量解并不代表物理上可实现的状态.\tbf{自由粒子不能存在于定态上},或者换言之\tbf{不存在具有特定能量的自由粒子}.\\
+\indent 但是这并不意味着分离变量解没有用处.从数学上考虑,含时薛定谔方程的一般解仍然是分离变量解的线性叠加(对于连续的变量$k$则应当由求和变为无穷积分):
+\[\iPsi(x,t)=\dfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\phi(k)\exp\left[\i\left(kx-\dfrac{\hbar k^2}{2m}t\right)\right]\di k\]
+这个波函数是可以归一化的,但是对$\phi(k)$和$k$有一定的要求,同时能量和速度也有一个相应的范围.我们称这样的波为\tbf{波包}.\\
+\indent 现在,对于给定的$\iPsi(x,0)$,就能根据上面的式子求解$\iPsi(x,t)$.问题变成如何根据确定的初始波函数求得匹配的$\phi(k)$,即
+\[\iPsi(x,0)=\dfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\phi(k)\e^{\i kx}\di k\]
+这是一个典型的傅里叶变换问题.我们对$\iPsi(x,0)$做逆傅里叶变换即可得上述问题的解:
+\[\phi(k)=\dfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}\iPsi(x,0)\e^{-\i kx}\di x\]
+\subsection{$\delta$函数势}
+狄拉克$\delta$函数是一个在原点处无限高且窄的尖峰,其图像下方面积是$1$:
+\[\delta(x)=\left\{\begin{array}{l}
+    0,\quad x\neq0\\
+    \infty,\quad x=0
+\end{array}\right.,\quad\int_{-\infty}^{+\infty}\delta(x)\di x=1\]
+严格来讲,不同于普通的函数,这是一个\tbf{广义函数}.无论如何,这在物理中很有用处,比如点电荷的电荷密度就是一个$\delta$函数.特别的,有
+\[f(x)\delta(x-a)=f(a)\delta(x-a),\quad \int_{-\infty}^{+\infty}f(x)\delta(x-a)\di x=f(a)\]
+\indent 现在考虑如下形式的势函数:
+\[V(x)=-\alpha\delta(x),\quad\alpha>0\]
+尽管这是一个人为定义的势,但是由此出发可以阐明一些重要的关于束缚态和散射态的理论. $\delta$函数势阱的薛定谔方程为
+\[-\dfrac{\hbar^2}{2m}\dfrac{\di^2\psi}{\di x^2}-\alpha\delta(x)\psi=E\psi\]
+由此可以求解束缚态$(E<0)$和散射态$(E>0)$.
+\begin{enumerate}[label=\tbf{\arabic*.},leftmargin=*]
+    \item \tbf{束缚态}\\
+    在$x<0$区域, $V(x)=0$,于是
+    \[\dfrac{\di^2\psi}{\di x^2}=-\dfrac{2mE}{\hbar^2}\psi=\kappa^2\psi,\quad\kappa=\dfrac{\sqrt{-2mE}}{\hbar}\]
+    这一微分方程的通解为
+    \[\psi(x)=A\e^{-\kappa x}+B\e^{\kappa x}\]
+    当$x\to-\infty$时第一项发散,所以$A=0$,于是
+    \[\psi(x)=B\e^{\kappa x},\quad x<0\]
+    在$x>0$区域,类似地有
+    \[\psi(x)=D\e^{-\kappa x},\quad x>0\]
+    前面已经说过$\psi(x)$应当连续,所以$D=B$.\\
+    我们仍然没有用到另一个对波函数的限制: $\dfrac{\di\psi}{\di x}$除去$V(x)=\infty$的点之外是连续的.为了用上这一条件,以及理解$\delta$函数在这里的作用,我们对薛定谔方程从$-\ep$到$\ep$积分,然后令$\ep\to0$ :
+    \[-\dfrac{\hbar^2}{2m}\int_{-\ep}^{\ep}\dfrac{\di^2\psi}{\di x^2}\di x+\int_{-\ep}^{\ep}V(x)\psi(x)\di x=E\int_{-\ep}^{\ep}\psi(x)\di x,\quad\ep\to0\]
+    第一个积分就是$\dfrac{\di\psi}{\di x}$在$-\ep$与$\ep$的差值,等号右边的积分由于$\psi(x)\leq\psi(0)=B<\infty$,因此最终等于$0$.这样就有
+    \[\Delta\left(\dfrac{\di\psi}{\di x}\right)=\lim_{\ep\to0}\left(\left.\dfrac{\p\psi}{\p x}\right|_{x=\ep}-\left.\dfrac{\p\psi}{\p x}\right|_{x=-\ep}\right)=\dfrac{2m}{\hbar^2}\lim_{\ep\to0}\int_{-\ep}^{\ep}V(x)\psi(x)\di x\]
+    一般情况下,右边的极限是$0$,因为$V(x)$通常是有限的值,这也是一般情况下$\dfrac{\di\psi}{\di x}$连续的原因.在这里我们有$V(x)=-\alpha\delta(x)$,于是根据$\delta$函数的定义可得
+    \[\Delta\left(\dfrac{\di\psi}{\di x}\right)=-\dfrac{2m\alpha}{\hbar^2}\psi(0)\]
+    根据我们已经得出的解的形式可得
+    \[-2B\kappa=-\dfrac{2m\alpha}{\hbar^2}B\]
+    从而$\kappa=\dfrac{m\alpha}{\hbar^2}$,于是能量的允许值为
+    \[E=-\dfrac{\hbar^2\kappa^2}{2m}=-\dfrac{m\alpha^2}{2\hbar^2}\]
+    最后对$\psi$归一化可得
+    \[\int_{-\infty}^{\infty}\left|\psi(x)\right|^2\di x=2|B|^2\int_{0}^{+\infty}\e6{2\kappa x}\di x=\dfrac{|B|^2}{\kappa}=1,\quad B=\sqrt{\kappa}=\dfrac{\sqrt{m\alpha}}{\hbar}\]
+    于是,对于$\delta$函数势阱而言,无论势阱的强度$\alpha$大小如何,它总是只有一个束缚态:
+    \[\psi(x)=\dfrac{\sqrt{m\alpha}}{\hbar}\exp\left(-\dfrac{m\alpha|x|}{\hbar^2}\right),\quad E=-\dfrac{m\alpha^2}{2\hbar^2}\]
+    \item \tbf{散射态}\\
+    对于$E>0$的散射态,在$x<0$处的薛定谔方程为
+    \[\dfrac{\di^2\psi}{\di x^2}=-\dfrac{2mE}{\hbar^2}\psi=-k^2\psi,\quad k=\dfrac{\sqrt{2mE}}{\hbar}\]
+    这一微分方程的通解为
+    \[\psi(x)=A\e^{\i kx}+B\e^{-\i kx}\]
+    两项都不发散,因此需要保留.同样地,对于$x>0$的情况,方程的通解为
+    \[\psi(x)=F\e^{\i kx}+G\e^{-\i kx}\]
+    和前面一样,两个边界条件分别要求
+    \[F+G=A+B\]
+    \[\i k(F-G-A+B)=-\dfrac{2m\alpha}{\hbar^2}(A+B)\]
+    更简洁地可以写成
+    \[F-G=A(1+2\i\beta)-B(1-2\i\beta),\quad\beta=\dfrac{m\alpha}{\hbar^2k}\]
+    显然,从数学上而言这不是一个可解的系统,它的变量太多了.我们不妨再思考这些参数的物理意义.前面已经说过$\e^{\i kx}$是一个向右传播的波,而$\e^{-\i kx}$是一个向左传播的波.在典型的散射实验中,粒子的入射方向是固定的.假设粒子从左边入射,那么从右边传过来的波的振幅应当为$0$.\\
+    于是, $A$是入射波的振幅, $B$是反射波的振幅, $F$是透射波的振幅,而 $G=0$.求解前面的式子可得
+    \[B=\dfrac{\i\beta}{1-\i\beta}A,\quad F=\dfrac{1}{1-\i\beta}A\]
+    既然$|\psi|^2$表示给定区域发现粒子的几率大小为$|\psi|^2$,所以入射粒子被反射回来的相对几率\footnote{这不是一个可以归一化的波函数,因此概率的绝对值是无法计算的,但是考虑反射与透射的几率之比是有意义的.}是
+    \[R=\dfrac{|B|^2}{|A|^2}=\dfrac{\beta^2}{1+\beta^2}\]
+    向右穿过的相对几率为
+    \[T=\dfrac{|F|^2}{|A|^2}=\dfrac{1}{1+\beta^2}\]
+    当然可以注意到$R+T=1$.我们将$\beta$的定义代入上面两个式子可得
+    \[R=\dfrac{1}{1+\dfrac{2\hbar^2E}{m\alpha^2}},\quad T=\dfrac{1}{1+\dfrac{m\alpha^2}{2\hbar^2E}}\]
+    可以看出来,能量$E$越大,透射的概率就越大.\\
+    对上述结果的数学解释无疑是复杂的.这里进行的简单的讨论主要说明在量子力学中,粒子翻越无限能量的势垒的概率并不为$0$.这就是名为\tbf{隧穿}的现象.
+\end{enumerate}
+\end{document}

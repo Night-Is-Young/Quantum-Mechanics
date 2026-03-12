@@ -1,0 +1,82 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{波函数}
+\subsection{波函数的性质}
+\begin{theorem}[薛定谔方程]
+    粒子的\tbf{波函数(wave function)}$\iPsi(x,t)$满足\tbf{薛定谔方程(Schrödinger equation)}\[\i\hbar\dfrac{\p\iPsi}{\p t}=-\dfrac{\hbar^2}{2m}\dfrac{\p^2\iPsi}{\p x^2}+V\iPsi\]
+\end{theorem}
+其中$\hbar$是\tbf{约化普朗克常数},满足$\hbar=\dfrac{h}{2\pi}$.
+\begin{theorem}[波函数的统计诠释]
+    粒子的波函数$\iPsi(x,t)$是粒子在位置$x$和时间$t$处出现的概率幅,在此时此处发现该粒子的概论密度函数即
+    \[P(x,t)=\left|\iPsi(x,t)\right|^2\]
+\end{theorem}
+概率密度函数的归一化条件要求波函数满足如下性质:
+\begin{theorem}[归一化I]
+    波函数需要满足\tbf{归一化(normalizing)}条件:
+    \[\int_{-\infty}^{+\infty}\left|\iPsi(x,t)\right|^2\di x=1\]
+\end{theorem}
+否则它将不满足前述的统计诠释.这一性质也要求波函数是\tbf{平方可积(square-integrable)}的\footnote{事实上我们一般讨论的波函数应当具有更良好的性质,这些性质在以后需要用到的时候会提到}.\\
+\indent 根据薛定谔方程和波函数的归一化条件可以推出如下性质:
+\begin{theorem}[归一化II]
+    如果粒子的波函数$\iPsi(x,t)$在$t=t_0$时满足归一化条件,那么它在任意时刻都满足归一化条件.
+\end{theorem}
+\begin{proof}
+    要证明这一点,只需说明
+    \[\dfrac{\di}{\di t}\int_{-\infty}^{+\infty}\left|\iPsi(x,t)\right|^2\di x=0\]
+    即可.将微分移到积分内部,只需证明
+    \[\int_{-\infty}^{+\infty}\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}\di x=0\]
+    即可.根据复合函数求导法则,以及$\left|\iPsi\right|^2=\iPsi\iPsi^\ast$,可得
+    \[\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}=\dfrac{\p(\iPsi\iPsi^\ast)}{\p t}=\iPsi\dfrac{\p\iPsi^\ast}{\p t}+\iPsi^\ast\dfrac{\p\iPsi}{\p t}\]
+    将薛定谔方程变形可得
+    \[\dfrac{\p\iPsi}{\p t}=\dfrac{\i\hbar}{2m}\dfrac{\p^2\iPsi}{\p x^2}-\dfrac{\i}{\hbar}V\iPsi\]
+    两边取复共轭可得
+    \[\dfrac{\p\iPsi^\ast}{\p t}=-\dfrac{\i\hbar}{2m}\dfrac{\p^2\iPsi^\ast}{\p x^2}+\dfrac{\i}{\hbar}V\iPsi^\ast\]
+    于是
+    \[\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}=\dfrac{\i\hbar}{2m}\left(\iPsi^\ast\dfrac{\p^2\iPsi}{\p x^2}-\iPsi\dfrac{\p^2\iPsi^\ast}{\p x^2}\right)=\dfrac{\p}{\p x}\left[\dfrac{\i\hbar}{2m}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\right]\]
+    于是
+    \[\int_{-\infty}^{+\infty}\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}\di x=\left.\dfrac{\i\hbar}{2m}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\right|_{-\infty}^{+\infty}\]
+    在一般的情况下(除非是一些病态函数所构成的反例,但那不在我们讨论的范围之内)根据归一化条件总有
+    \[\lim_{x\to\infty}\iPsi(x,t)=0,\quad\lim_{x\to\infty}\dfrac{\p\iPsi(x,t)}{\p x}=0\]
+    并且显然对$\iPsi^\ast$也成立,因此就有
+    \[\dfrac{\di}{\di t}\int_{-\infty}^{+\infty}\left|\iPsi(x,t)\right|^2\di x=\int_{-\infty}^{+\infty}\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}\di x=0\]
+\end{proof}
+\subsection{测量}
+应当说,测量粒子的位置(或者一些别的物理性质)会改变其波函数的性质.如果假定测量到粒子的位置为$C$(由于仪器的精度问题,实际上应当是一个较小的范围),那么波函数就会变成在$C$附近的一个尖锐的峰.我们称这样的过程为\tbf{坍缩(collapse)}.如果立即进行第二次测量,那么我们仍然能观察到粒子出现在$C$处.随着时间的流逝,波函数将依照薛定谔方程变得弥散,粒子位置的不确定性也将显现.\\
+\indent 因此,一个朴素的结论是:在量子力学中存在两种不同的物理过程:波函数按照薛定谔方程连续地演化;以及波函数在测量后发生突然而不连续的坍缩.
+\subsection{粒子的物理性质}
+我们可以从波函数的统计诠释出发得到粒子的各个物理量(的期望值).例如,处于$\iPsi$状态的粒子,其位置$x$的期望值为
+\[\avg{x}=\int_{-\infty}^{+\infty}x\left|\iPsi(x,t)\right|^2\di x\]
+显然这不是指对同一个粒子多次测量$x$的平均结果,因为我们已经知道测量会改变波函数$\iPsi$.我们需要准备一个\tbf{系综}解决这个问题.
+\begin{definition}[系综与期望值]\\
+    \tbf{系综(ensemble)}是描述在给定宏观约束条件下所有可能微观状态的集合.\\
+    \tbf{期望值}是对一个相同系统的系综测量的平均值.
+\end{definition}
+既然已经知道位置$x$的期望,我们很自然地会想到求速度$v$的期望\footnote{在量子力学中速度的含义是不清楚的.就目前而言,假定速度的期望值等于位置期望值对时间的导数即可.}.不难得到
+\[\avg{v}=\dfrac{\di\avg{x}}{\di t}=\dfrac{\di}{\di t}\int_{-\infty}^{+\infty}x\left|\iPsi(x,t)\right|^2\di x=\int_{-\infty}^{+\infty}x\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}\di x\]
+根据前面的推导有
+\[\dfrac{\p\left|\iPsi(x,t)\right|^2}{\p t}=\dfrac{\p}{\p x}\left[\dfrac{\i\hbar}{2m}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\right]\]
+于是
+\[\avg{v}=\dfrac{\i\hbar}{2m}\int_{-\infty}^{+\infty}x\dfrac{\p}{\p x}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\di x\]
+采用分部积分法可得
+\[\avg{v}=\dfrac{\i\hbar}{2m}\left[\left.x\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\right|_{-\infty}^{+\infty}-\int_{-\infty}^{+\infty}\dfrac{\p x}{\p x}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\di x\right]\]
+分部积分的前一项由归一化性质可知\footnote{严格证明是复杂的,我们不妨把它当作波函数的一种需要满足的性质.}趋近于$0$.于是
+\[\avg{v}=-\dfrac{\i\hbar}{2m}\int_{-\infty}^{+\infty}\left(\iPsi^\ast\dfrac{\p\iPsi}{\p x}-\iPsi\dfrac{\p\iPsi^\ast}{\p x}\right)\di x\]
+对第二项再次使用分部积分法可得
+\[-\int_{-\infty}^{+\infty}\iPsi\dfrac{\p\iPsi^\ast}{\p x}\di x=\int_{-\infty}^{+\infty}\iPsi^\ast\dfrac{\p\iPsi}{\p x}\di x-\left.\iPsi^\ast\iPsi\right|_{-\infty}^{+\infty}=\int_{-\infty}^{+\infty}\iPsi^\ast\dfrac{\p\iPsi}{\p x}\di x\]
+从而
+\[\avg{v}=-\dfrac{\i\hbar}{m}\int_{-\infty}^{+\infty}\iPsi^\ast\dfrac{\p\iPsi}{\p x}\di x\]
+实际上,由于上述速度含义的模糊性,我们更常使用动量$p$的期望值,即
+\[\avg{p}=m\avg{v}=-\i\hbar\int_{-\infty}^{+\infty}\iPsi^\ast\dfrac{\p\iPsi}{\p x}\di x\]
+为了更好地表现前面两个结论的统一性,我们定义算符
+\[\hat{x}=x,\quad\hat{p}=-\i\hbar\dfrac{\p}{\p x}\]
+这样就有
+\[\avg{x}=\int_{-\infty}^{+\infty}\iPsi\hat{x}\iPsi\di x,\quad\avg{p}=\int_{-\infty}^{+\infty}\iPsi\hat{p}\iPsi\di x\]
+根据位置和动量的期望值,我们就能得到其它一些常见物理量的期望值.例如动能$T=\dfrac{1}{2}mv^2=\dfrac{p^2}{2m}$,于是
+\[\avg{T}=\int_{-\infty}^{+\infty}\iPsi\hat{T}\iPsi\di x,\quad\hat{T}=-\dfrac{\hbar^2}{2m}\dfrac{\p^2}{\p x^2}\]
+\end{document}
