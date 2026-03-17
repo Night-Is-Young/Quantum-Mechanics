@@ -112,6 +112,109 @@
 \[c(p)=\inprod{f_p}{\iPsi}=\dfrac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{+\infty}\exp\left(-\dfrac{\i px}{\hbar}\right)\iPsi(x,t)\di x\]
 这是一个非常重要的物理量:
 \begin{definition}[动量空间波函数]
-    动量空间波函数
+    动量空间波函数$\iPhi(p,t)$为坐标空间波函数$\iPsi(x,t)$的傅里叶变换:
+    \[\iPhi(p,t)=\dfrac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{+\infty}\exp\left(-\dfrac{\i px}{\hbar}\right)\iPsi(x,t)\di x\]
 \end{definition}
+同样按照广义统计诠释,对动量进行测量的概率密度函数即为$\left|\iPhi(p,t)\right|^2$.
+\subsection{不确定原理}
+在严格叙述广义统计诠释后,我们现在来推导(广义的)不确定原理.
+\begin{theorem}[不确定原理]
+    对于可观测量$A$和$B$,总有
+    \[\sigma_A^2\sigma_B^2\geq\left(\dfrac{1}{2\i}\avg{\left[\hat{A},\hat{B}\right]}\right)^2\]
+\end{theorem}
+\begin{proof}
+    根据方差的定义有
+    \[\sigma_A^2=\avg{(\avg{A}-A)^2}=\inprod{\left(\hat{A}-\avg{A}\right)\iPsi}{\left(\hat{A}-\avg{A}\right)\iPsi}=\inprod{f}{f},\quad f=\left(\hat{A}-\avg{A}\right)\iPsi\]
+    同样地有
+    \[\sigma_B^2=\inprod gg,\quad g=\left(\hat{B}-\avg{B}\right)\iPsi\]
+    根据Cauchy-Schwarz不等式有
+    \[\sigma_A^2\sigma_B^2=\inprod ff\inprod gg\geq\left|\inprod fg\right|^2\]
+    由于对于任意复数$z$有
+    \[\left|z^2\right|=\left[\Re(z)\right]^2+\left[\Im(z)\right]^2\geq\left[\Im(z)\right]^2=\left[\dfrac{1}{2\i}\left(z-z^\ast\right)\right]^2\]
+    从而令$z=\inprod fg$就有
+    \[\sigma_A^2\sigma_B^2\geq\left(\dfrac{1}{2\i}\left[\inprod fg-\inprod gf\right]\right)^2\]
+    根据厄米算符的性质有
+    \[\begin{aligned}
+        \inprod fg
+        &=\inprod{\left(\hat{A}-\avg{A}\right)\iPsi}{\left(\hat{B}-\avg{B}\right)\iPsi}=\inprod{\iPsi}{\left(\hat{A}-\avg{A}\right)\left(\hat{B}-\avg{B}\right)\iPsi}\\
+        &=\inprod{\iPsi}{\hat{A}\hat{B}\iPsi}-\avg{A}\inprod{\iPsi}{\hat{B}\iPsi}-\avg{B}\inprod{\iPsi}{\hat{A}\iPsi}+\avg{A}\avg{B}\inprod{\iPsi}{\iPsi}\\
+        &=\avg{\hat{A}\hat{B}}-\avg{A}\avg{B}
+    \end{aligned}\]
+    同理有
+    \[\inprod gf=\avg{\hat{B}\hat{A}}-\avg{A}\avg{B}\]
+    于是
+    \[\inprod fg-\inprod gf=\avg{\hat{A}\hat{B}}-\avg{\hat{B}\hat{A}}=\avg{\left[\hat{A},\hat{B}\right]}\]
+    于是
+    \[\sigma_A^2\sigma_B^2\geq\left(\dfrac{1}{2\i}\avg{\left[\hat{A},\hat{B}\right]}\right)^2\]
+\end{proof}
+事实上,对于任意一对可观测量,如果其算符不对易,那么这两个观测量就存在不确定原理,我们称这对可观测量为\tbf{不相容可观测量}.不相容可观测量没有相同的本征函数(或者更严谨地说,不存在相同的本征函数构成的完备集).\\
+\indent 除去比较著名的不确定原理,即位置-动量不确定原理外,另一对常见的不相容的可观测量是时间$t$和能量$E$.
+\begin{theorem}[能量-时间不确定原理]
+    能量$E$和时间$t$测定的标准差满足
+    \[\Delta t\Delta E\geq\dfrac{\hbar}{2}\]
+\end{theorem}
+在相对论中,这一结论是比较容易说明的.但是我们现在希望从非相对论的量子力学理论中推导出此式;并且事实上,尽管它与位置-动量不确定原理的形式相似,原理却不同.毕竟,位置$x$,动量$p$和能量$E$都是系统的动力学变量,但时间$t$却不是.
+\begin{proof}
+    时间$t$是衡量体系变化快慢的量度.我们考虑可观测量$Q(x,p,t)$的期望对时间$t$的导数:
+    \[\dfrac{\d}{\d t}\avg{Q}=\dfrac{\d}{\d t}\inprod{\iPsi}{\hat{Q}\iPsi}=\inprod{\dfrac{\p\iPsi}{\p t}}{\hat{Q}\iPsi}+\inprod{\iPsi}{\dfrac{\p\hat{Q}}{\p t}\iPsi}+\inprod{\iPsi}{\hat{Q}\dfrac{\p\iPsi}{\p t}}\]
+    根据薛定谔方程
+    \[\i\hbar\dfrac{\p\iPsi}{\p t}=\hat{H}\iPsi\]
+    有
+    \[\dfrac{\d}{\d t}\avg{Q}=-\dfrac{1}{\i\hbar}\inprod{\hat{H}\iPsi}{\hat{Q}\iPsi}+\dfrac{1}{\i\hbar}\inprod{\iPsi}{\hat{Q}\hat{H}\iPsi}+\avg{\dfrac{\p\hat{Q}}{\p t}}\]
+    而$\hat{H}$本身是厄米算符,于是
+    \[\dfrac{\d}{\d t}\avg{Q}=\dfrac{\i}{\hbar}\avg{\left[\hat{H},\hat{Q}\right]}+\avg{\dfrac{\p\hat{Q}}{\p t}}\]
+    这一式子本身是一个重要的公式:
+    \begin{theorem}[广义埃伦菲斯特定理]
+        可观测量$Q$的期望随时间的变化率为
+        \[\dfrac{\d}{\d t}\avg{Q}=\dfrac{\i}{\hbar}\avg{\left[\hat{H},\hat{Q}\right]}+\avg{\dfrac{\p\hat{Q}}{\p t}}\]
+    \end{theorem}
+    可以看出,在算符不含时的情况下(一般而言都是如此),其期望值的变化率与该算符和哈密顿算符的对易决定.特别地,当$\hat{Q}$与$\hat{H}$对易时,$\avg{Q}$是常量,即一个守恒量.\\
+    \indent 现在,我们在广义不确定关系中令$A=H$和$B=Q$,并且假定$Q$不含时,则有
+    \[\sigma_H^2\sigma_Q^2\geq\left(\dfrac{1}{2\i}\avg{\left[\hat{H},\hat{Q}\right]}\right)^2=\left(\dfrac{1}{2\i}\dfrac{\hbar}{\i}\dfrac{\d\avg{Q}}{\d t}\right)^2\]
+    即
+    \[\sigma_H\sigma_Q\geq\dfrac{\hbar}{2}\left|\dfrac{\d\avg{Q}}{\d t}\right|\]
+    定义$\Delta E=\sigma_H$以及$\Delta t=\dfrac{\sigma_Q}{\left|\d\avg{Q}/\d t\right|}$,则有
+    \[\Delta E\Delta t\geq\dfrac{\hbar}{2}\]
+    这里$\Delta t$表示$Q$的期望值大小变化一个标准差所需的时间.特别地, $\Delta t$总是依赖于可观测量$Q$.不过,当$\Delta E$比较小时,所有的可观测量的变化都是比较平缓的;反之,如果某个可观测量变化很快,那么能量的不确定性就非常大.
+\end{proof}
+\subsection{矢量和算符}
+\subsubsection{Hilbert空间的基矢}
+一个向量空间中的矢量$\vec{u}$可以用不同的基进行表达,尽管表达的方式不同,但它们都指向同一个矢量.量子力学中体系的状态也是如此,它由Hilbert空间中的一个矢量来描述: $\ket{\mathcal{S}(t)}$\footnote{这是被称作Dirac符号中的\tbf{右矢}.我们将马上正式地介绍Dirac符号.}.那么,波函数$\iPsi(x,t)$实际上是状态$\ket{\mathcal{S}(t)}$在坐标本征函数作为基上展开的分量:
+\[\iPsi(x,t)=\inprod{x}{\mathcal{S}(t)}\]
+这里基矢量$\ket{x}$是本征值为$x$的算符$\hat{x}$的本征函数,求内积时取其共轭转置$\bra{x}$.同样地,动量空间上的波函数是$\ket{\mathcal{S}(t)}$以动量本征函数为基进行展开时的$p$分量:
+\[\iPhi(p,t)=\inprod{p}{\mathcal{S}(t)}\]
+$\bra{p}$的含义同理.或者我们可以把$\ket{\mathcal{S}(t)}$用有离散谱的算符(例如能量)的本征函数的基展开:
+\[c_n(t)=\inprod{n}{\mathcal{S}(t)}\]
+这里基矢量$\bra{n}$是$\hat{H}$的第$n$个本征函数.所有上面的表示方法都是同一个状态,表示一样的信息,仅仅是描述同一状态(矢量)的在三组基下的展开方式:
+\[\ket{\mathcal{S}(t)}\to\int\iPsi(y,t)\delta(x-y)\di y=\int\iPhi(p,t)\dfrac{1}{\sqrt{2\pi\hbar}}\exp\left(\dfrac{\i px}{\hbar}\right)\d p=\sum_{n}c_n\exp\left(-\dfrac{\i E_n t}{\hbar}\right)\psi_n(x)\]
+\indent 而算符是Hilbert空间上的线性变换:
+\[\ket{\beta}=\hat{Q}\ket\alpha\]
+算符$\hat{Q}$所对应的矩阵元表示了分量的变换情况,这在线性代数中已经学习过.\\
+\indent 尽管状态$\ket{\mathcal{S}(t)}$是Hilbert空间上的矢量,但实际情况下的大多数问题都是在坐标空间中讨论的,因此把波函数$\iPsi(x,t)$称作\textit{体系的状态}并无大碍.
+\subsubsection{Dirac符号}
+Dirac提议把内积分成两部分:
+\begin{definition}[Dirac符号]
+    内积$\inprod{\alpha}{\beta}$可以分为两部分:\tbf{左矢(bra)} $\bra{\alpha}$和\tbf{右矢(ket)} $\ket(\beta)$.
+\end{definition}
+右矢代表一个矢量,而左矢作为右矢的共轭转置实际上也是一种算符,其组成的空间是原来空间的\tbf{对偶空间}.这样的记号提供了一种简洁的数学工具.例如:
+\begin{definition}[投影算符]
+    归一化矢量$\ket{\alpha}$对应的\tbf{投影算符}为:
+    \[\hat{P}=\ket{\alpha}\bra{\alpha}\]
+    对于任意的向量$\ket{\beta}$,投影算符给出其在$\ket{\alpha}$上的投影向量:
+    \[\hat{P}\ket{\beta}=\inprod{\alpha}{\beta}\ket{\alpha}\]
+\end{definition}
+并且如果$\left\{\ket{e_n}\right\}$是离散的规范正交基,则有
+\[\sum_{n}\ket{e_n}\bra{e_n}=\mbf{1}\]
+为\tbf{恒等算符}.这样,对于任意的向量$\ket{\alpha}$都有
+\[\alpha=\mbf1\alpha=\sum_{n}\ket{e_n}\inprod{e_n}{\alpha}\]
+类似地,如果$\left\{\ket{e_z}\right\}$是连续的Dirac正交归一的连续基,那么
+\[\int\ket{e_z}\bra{e_z}\di z=\mbf{1}\]
+\subsubsection{Dirac符号中的基矢变换}
+Dirac符号的优点是我们讨论问题可以不局限在某一组特定的基上,而且可以方便地在不同的基之间进行变换.这里以一个引理的证明为例.
+\begin{lemma}
+    动量算符$\hat{p}$的形式可以由正则对易关系$\left[\hat{x},\hat{p}\right]=\i\hbar$推出.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
 \end{document}

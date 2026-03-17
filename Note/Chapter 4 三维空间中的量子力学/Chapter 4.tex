@@ -1,0 +1,203 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{三维空间中的量子力学}
+\subsection{薛定谔方程}
+薛定谔方程可以很容易地推广到三维情形.考虑三维空间中的哈密顿算符$\hat{H}$,它由经典能量得出:
+\[\dfrac{1}{2}mv^2+V=\dfrac{1}{2m}\left(p_x^2+p_y^2+p_z^2\right)+V\]
+按照标准的处理方法有$p_u\to-\i\hbar\dfrac{\p}{\p u}$,其中$u=x,y,z$,则有
+\[\i\hbar\dfrac{\p\iPsi}{\p t}=\hat{H}\iPsi=-\dfrac{\hbar^2}{2m}\nabla^2\iPsi+V\iPsi,\quad\nabla^2=\dfrac{\p^2}{\p x^2}+\dfrac{\p^2}{\p y^2}+\dfrac{\p^2}{\p z^2}\]
+和我们在第二章中对各种势函数的推导一样,三维空间中的薛定谔方程也需要求解一系列微分方程.在所有这些势函数中,最重要的是中心势函数,即$V=V(r)$.接下来的几个小节将在此基础上求解三维定态薛定谔方程.
+\subsubsection{球坐标}
+根据势函数$V(r)$的对称性,可以自然地想到用球坐标解决问题.在球坐标下的Laplacian算子为
+\[\nabla^2=\dfrac{1}{r^2}\dfrac{\p}{\p r}\left(r^2\dfrac{\p}{\p r}\right)+\dfrac{1}{r^2\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p}{\p\theta}\right)+\dfrac{1}{r^2\sin^2\theta}\dfrac{\p^2}{\p\phi^2}\]
+在球坐标系中,定态薛定谔方程可写作
+\[-\dfrac{\hbar^2}{2m}\left[\dfrac{1}{r^2}\dfrac{\p}{\p r}\left(r^2\dfrac{\p\psi}{\p r}\right)+\dfrac{1}{r^2\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p\psi}{\p\theta}\right)+\dfrac{1}{r^2\sin^2\theta}\dfrac{\p^2\psi}{\p\phi^2}\right]+V\psi=E\psi\]
+对波函数$\psi(r,\theta,\phi)$分离变量:
+\[\psi(r,\theta,\phi)=R(r)Y(\theta,\phi)\]
+代入薛定谔方程可得
+\[-\dfrac{\hbar^2}{2m}\left[\dfrac{Y}{r^2}\dfrac{\d}{\d r}\left(r^2\dfrac{\d R}{\d r}\right)+\dfrac{R}{r^2\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p Y}{\p\theta}\right)+\dfrac{R}{r^2\sin^2\theta}\dfrac{\p^2 Y}{\p\phi^2}\right]+VRY=ERY\]
+整理上式可得
+\[\left\{\dfrac{1}{R}\dfrac{\d}{\d r}\left(r^2\dfrac{\d R}{\d r}\right)-\dfrac{2mr^2}{\hbar}\left[V(r)-E\right]\right\}+\dfrac{1}{Y}\left\{\dfrac{1}{\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p Y}{\p\theta}\right)+\dfrac{1}{\sin^2\theta}\dfrac{\p^2 Y}{\p\phi^2}\right\}=0\]
+上式的两部分分别仅与$r$和$\theta,\phi$有关.因此,为使上式总是成立,每一项必须总是常数.我们现在把这一常数记作$\ell(\ell+1)$,则有
+\[\dfrac{1}{R}\dfrac{\d}{\d r}\left(r^2\dfrac{\d R}{\d r}\right)-\dfrac{2mr^2}{\hbar}\left[V(r)-E\right]=\ell(\ell+1)\]
+\[\dfrac{1}{Y}\left\{\dfrac{1}{\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p Y}{\p\theta}\right)+\dfrac{1}{\sin^2\theta}\dfrac{\p^2 Y}{\p\phi^2}\right\}=-\ell(\ell+1)\]
+\subsubsection{角方程}
+我们先来求解有关$\theta,\phi$的方程,因为它与势函数$V(r)$无关.两边同乘$Y\sin^2\theta$可得
+\[\sin\theta\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p Y}{\p\theta}\right)+\dfrac{\p^2 Y}{\p\phi^2}=-\ell(\ell+1)Y\sin^2\theta\]
+在电动力学中也出现过这样的方程.对它的处理办法是继续分离变量:
+\[Y(\theta,\phi)=\Theta(\theta)\Phi(\phi)\]
+代入角方程可得
+\[\left\{\dfrac{1}{\Theta}\left[\sin\theta\dfrac{\d}{\d\theta}\left(\sin\theta\dfrac{\d\Theta}{\d\theta}\right)\right]+\ell(\ell+1)\sin^2\theta\right\}+\dfrac{1}{\Phi}\dfrac{\d^2\Phi}{\d\phi^2}=0\]
+同样地,两项分别仅与$\theta$和$\phi$有关,因此必须等于同一个常数.记分离常数为$m^2$,则有
+\[\dfrac{1}{\Theta}\left[\sin\theta\dfrac{\d}{\d\theta}\left(\sin\theta\dfrac{\d\Theta}{\d\theta}\right)\right]+\ell(\ell+1)\sin^2\theta=m^2\]
+\[\dfrac{1}{\Phi}\dfrac{\d^2\Phi}{\d\phi^2}=-m^2\]
+\indent 关于$\phi$的方程的解非常简单:
+\[\Phi(\phi)=\e^{\i m\phi}\]
+前面的常数因子可以吸收进$\Theta$中.现在,当$\phi$变化$2\pi$时,我们会回到空间中的同一点.这自然地要求
+\[\Phi(\phi+2\pi)=\Phi(\phi)\]
+这就要求
+\[\e^{\i m(\phi+2\pi)}=\e^{\i m\phi}\]
+也即$\e^{2\pi\i m}=1$.这要求$m$必须为整数:
+\[m=0,\pm1,\pm2,\cdots\]
+\indent 而关于$\theta$的方程则复杂得多.根据微分方程理论可知这方程的解为
+\[\Theta(\theta)=A\text{P}_\ell^m(\cos\theta)\]
+其中$\text{P}_\ell^m$是\tbf{缔合勒让德函数}:
+\[\text{P}_\ell^m(x)=(-1)^m\left(1-x^2\right)^{m/2}\left(\dfrac{\d}{\d x}\right)^m\text{P}_\ell(x)\]
+这里$\text{P}_\ell(x)$是$\ell$阶\tbf{勒让德多项式},可由下面的式子定义\footnote{实际上,勒让德多项式也是在$L^2[-1,1]$上对$1,x,x^2,\cdots$进行施密特正交化的结果.}:
+\[\text{P}_\ell(x)=\dfrac{1}{2^\ell\ell!}\left(\dfrac{\d}{\d x}\right)^\ell\left(x^2-1\right)^\ell\]
+注意,只有$\ell$是非负整数,上式才有意义;并且当$m>\ell$时$\text{P}_\ell^m=0$.于是,有意义的取值如下:
+\[\ell=0,1,2,\cdots;\quad m=-\ell,-\ell+1,\cdots,-1,0,1,\cdots,\ell-1,\ell\]
+另外,尽管关于$\Theta$的微分方程是二阶的,理论上它应该有两个线性无关的解,但除去给出的那个解之外另一个解在$\theta=0$和$\theta=\pi$时发散,不具有物理意义.\\
+\indent 我们现在来考虑归一化条件.球坐标的体积元为
+\[\di^3\vec{r}=\d x\d y\d z=r^2\sin\theta\d r\d\theta\d\phi\]
+于是归一化条件为
+\[\int\left|\psi\right|^2r^2\sin\theta\d r\d\theta\d\phi=\int\left|R\right|^2r^2\di r\int\left|Y\right|^2\sin\theta\d\theta\d\phi\]
+为了方便考虑,对$R$和$Y$分别归一化可得
+\[\int\left|R\right|^2r^2\di r=\int\left|Y\right|^2\sin\theta\d\theta\d\phi=1\]
+归一化的角向波函数称为\tbf{球谐函数}.
+\begin{definition}[球谐函数]
+    \[Y_\ell^m(\theta,\phi)=\sqrt{\dfrac{2\ell+1}{4\pi}\dfrac{(\ell-m)!}{(\ell+m)!}}\e^{\i m\phi}\text{P}_\ell^m(\cos\theta)\]
+\end{definition}
+我们将在后面证明它们是自动正交的.
+\subsubsection{径向方程}
+对径向方程
+\[\dfrac{1}{R}\dfrac{\d}{\d r}\left(r^2\dfrac{\d R}{\d r}\right)-\dfrac{2mr^2}{\hbar}\left[V(r)-E\right]=\ell(\ell+1)\]
+做变量代换$u(r)=rR(r)$可得
+\[-\dfrac{\hbar^2}{2m}\dfrac{\d^2 u}{\d r^2}+\left[V+\dfrac{\hbar^2}{2m}\dfrac{\ell(\ell+1)}{r^2}\right]u=Eu\]
+这就是\tbf{径向方程}.除了有效势以外,在形式上它与一维薛定谔方程一致.有效势包含一个额外的项,即\tbf{离心项}:
+\[\dfrac{\hbar^2}{2m}\dfrac{\ell(\ell+1)}{r^2}\]
+它倾向于将粒子向外抛出.在势函数$V$没有给定之前,我们对径向方程的讨论只能到此为止.
+\subsection{氢原子}
+氢原子由一个质子与一个电子组成.由于质子的质量很大,因此我们假定其在原点保持静止,那么电子的库伦势能为
+\[V(r)=-\dfrac{e^2}{4\pi\ep_0}\dfrac{1}{r}\]
+现在,可以将径向方程改写为
+\[-\dfrac{\hbar^2}{2m_\e}\dfrac{\d^2u}{\d r^2}+\left[-\dfrac{e^2}{4\pi\ep_0}\dfrac1r+\dfrac{\hbar^2}{2m_\e}\dfrac{\ell(\ell+1)}{r^2}\right]u=Eu\]
+\indent 我们主要考虑束缚态的情形.令
+\[\kappa=\dfrac{\sqrt{-2m_\e E}}{\hbar}\]
+则有
+\[\dfrac{1}{\kappa}\dfrac{\d^2u}{\d r^2}=\left[1-\dfrac{m_\e e^2}{2\pi\ep_0\hbar^2\kappa}\dfrac{1}{\kappa r}+\dfrac{\ell(\ell+1)}{(\kappa r)^2}\right]u\]
+接着令
+\[\rho=\kappa r,\quad\rho_0=\dfrac{m_\e e^2}{2\pi\ep_0\hbar^2\kappa}\]
+这样有
+\[\dfrac{\d^2u}{\d\rho^2}=\left[1-\dfrac{\rho_0}{\rho}+\dfrac{\ell(\ell+1)}{\rho^2}\right]u\]
+\indent 这一方程的解是超越函数.为此,我们结合势函数的性质逐步地分析此方程的解.当$\rho\to+\infty$时,右边的项主要由常数项控制,即
+\[\lim_{\rho\to+\infty}\dfrac{\dfrac{\d^2u}{\d\rho^2}}{\left[1-\dfrac{\rho_0}{\rho}+\dfrac{\ell(\ell+1)}{\rho^2}\right]u}=\lim_{\rho\to+\infty}\dfrac{1}{u}\dfrac{\d^2u}{\d\rho^2}=1\]
+这要求$u\to A\e^{-\rho}+B\e^{\rho}$.但是$\e^{\rho}$项在$\rho\to\infty$发散,这不满足我们对波函数的要求,那么$B=0$.于是有
+\[u(\rho)\sim A\e^{-\rho},\quad\rho\to\infty\]
+而当$\rho\to0$时离心项起主要作用,即
+\[\lim_{\rho\to0}\dfrac{\dfrac{\d^2u}{\d\rho^2}}{\left[1-\dfrac{\rho_0}{\rho}+\dfrac{\ell(\ell+1)}{\rho^2}\right]u}=\lim_{\rho\to+\infty}\dfrac{\ell(\ell+1)u}{\rho^2}\dfrac{\d^2 u}{\d\rho^2}=1\]
+这要求$u\to C\rho^{\ell+1}+D\rho^{-\ell}$.当$\rho\to0$时, $\rho^{-\ell}$也是发散的,因此$D=0$,于是有
+\[u(\rho)\sim C\rho^{\ell+1}\]
+\indent 在知道上述的渐进行为后,我们不妨令
+\[u(\rho)=\rho^{\ell+1}\e^{-\rho}v(\rho)\]
+然后将它代入前述的方程中,有
+\[\begin{aligned}
+    \left[1-\dfrac{\rho_0}{\rho}+\dfrac{\ell(\ell+1)}{\rho^2}\right]\rho^{\ell+1}\e^{-\rho}v
+    &=\dfrac{\d}{\d\rho}\left[(\ell+1)\rho^{\ell}\e^{-\rho}v-\rho^{\ell+1}\e^{-\rho}v+\rho^{\ell+1}\e^{-\rho}\dfrac{\d v}{\d\rho}\right]\\
+    &=\rho^{\ell+1}\e^{-\rho}\dfrac{\d^2v}{\d\rho^2}+2(\ell+1-\rho)\rho^{\ell}\e^{-\rho}\dfrac{\d v}{\d\rho}+\left[-2\ell-2+\rho+\dfrac{\ell(\ell+1)}{\rho}\right]\rho^{\ell}\e^{-\rho}v
+\end{aligned}\]
+整理上面的式子可得
+\[\rho\dfrac{\d^2 v}{\d\rho^2}+2(\ell+1-\rho)\dfrac{\d v}{\d\rho}+\left(-2\ell-2+\rho_0\right)v=0\]
+\indent 现在这个方程比原来好一些,因为没有$1/\rho$项了.我们接着把$v(\rho)$展开为幂级数形式:
+\[v(\rho)=\sum_{j=0}^{\infty}c_j\rho^j\]
+于是可以得到
+\[\dfrac{\d v}{\d\rho}=\sum_{j=0}^{\infty}(j+1)c_{j+1}\rho^{j},\quad\dfrac{\d^2v}{\d\rho^2}=\sum_{j=0}^{\infty}(j+1)(j+2)c_{j+2}\rho^{j}\]
+这样,代入前面的微分方程可得
+\[\sum_{j=0}^{\infty}(j+1)(j+2)c_{j+2}\rho^{j+1}+2(\ell+1)\sum_{j=0}^{\infty}(j+1)c_{j+1}\rho^{j}-2\sum_{j=0}^{\infty}(j+1)c_{j+1}\rho^{j+1}+(-2\ell-2+\rho_0)\sum_{j=0}^{\infty}c_j\rho^j=0\]
+对比系数可得
+\[j(j+1)c_{j+1}\rho^{j}+2(\ell+1)(j+1)c_{j+1}-2jc_j+(-2\ell-2+\rho_0)c_j=0\]
+也即
+\[c_{j+1}\left[\dfrac{2(j+\ell+1)-\rho_0}{(j+1)(j+2\ell+2)}\right]c_j\]
+\indent 现在,我们分析在$j$较大时展开系数的形式.此时有
+\[c_{j+1}\sim\dfrac{2j}{j(j+1)}c_j=\dfrac{2}{j+1}c_j,\quad\text{i.e.}c_j\sim\dfrac{2^j}{j!}c_0\]
+如果依此为结果,就有
+\[v(\rho)=c_0\sum_{j=0}^{\infty}\dfrac{2^j}{j!}\rho^j=c_0\e^{2\rho},\quad u(\rho)=c_0\rho^{\ell+1}\e^{\rho}\]
+这在$\rho$很大时是发散的.和我们用解析法求解谐振子模型的波函数类似,只有让级数在某一处截断才能得到有意义的结果,即存在$N$使得$C_{N-1}\neq0$且$C_N=0$.这样,根据递推式有
+\[2(N+\ell)-\rho_0=0\]
+定义$n=N+\ell$,我们有$\rho_0=2n$.由于$\rho_0$决定了能量$E$,即
+\[E=-\dfrac{\hbar^2\kappa^2}{2m_\e}=-\dfrac{m_\e e^4}{8\pi^2\ep_0^2\hbar^2\rho_0^2}\]
+这就可以得出玻尔公式:
+\begin{theorem}[玻尔公式]
+    \[E=-\left[\dfrac{m_\e}{2\hbar^2}\left(\dfrac{e^2}{4\pi\ep_0}\right)^2\right]\dfrac{1}{n^2}=\dfrac{E_1}{n^2},\quad n=1,2,3,\cdots\]
+\end{theorem}
+结合$\kappa$的定义有
+\[\kappa=-\left(\dfrac{m_\e e^2}{4\pi\ep_0\hbar^2}\right)\dfrac1n=\dfrac{1}{an},\quad a=\dfrac{4\pi\ep_0\hbar^2}{m_\e e^2}=\SI{52.9}{\pico\meter}\]
+这里的$a$就是\tbf{玻尔半径}.而$n=1$的状态,即对应的能量最低的状态,被称作\tbf{基态},其能量为:
+\[E_1=-\left[\dfrac{m_\e}{2\hbar^2}\left(\dfrac{e^2}{4\pi\ep_0}\right)^2\right]=\SI{-13.6}{\electronvolt}\]
+由$n=N+\ell$可知基态时$\ell=m=0$.对此时的波函数归一化可得
+\[\psi_{100}=\dfrac{1}{\sqrt{\pi a^3}}\e^{-r/a}\]
+\subsection{角动量}
+在上一节中,我们已经解出了氢原子的电子的波函数.可以看到,在三个量子数中,只有主量子数$n$决定态的能量,而$\ell$和$m$则与轨道角动量有关.在经典理论中,能量和角动量都是基本守恒量.因此,现在我们来研究角动量的本征函数.\\
+\indent 一般来说,角动量可由
+\[\vec{L}=\vec{r}\times\vec{p}\]
+给出,于是
+\[\hat{L}_x=-\i\hbar\left(y\dfrac{\p}{\p z}-z\dfrac{\p}{\p y}\right),\quad\hat{L}_y=-\i\hbar\left(z\dfrac{\p}{\p x}-x\dfrac{\p}{\p z}\right),\quad\hat{L}_z=-\i\hbar\left(x\dfrac{\p}{\p y}-y\dfrac{\p}{\p x}\right)\]
+\subsubsection{角动量的本征值}
+首先,角动量算符之间是不对易的.经过一些计算可以得到:
+\begin{theorem}[角动量对易关系]
+    \[\left[\hat{L}_x,\hat{L}_y\right]=\i\hbar\hat{L}_z,\quad\left[\hat{L}_y,\hat{L}_z\right]=\i\hbar\hat{L}_x,\quad\left[\hat{L}_z,\hat{L}_x\right]=\i\hbar\hat{L}_y\]
+\end{theorem}
+尽管角动量算符互相不对易,但是总角动量$L$的平方却和它们三者对易.以$\hat{L}_x$为例:
+\[\begin{aligned}
+    \left[\hat{L}^2,\hat{L}_x\right]
+    &=\left[\hat{L}_x^2,\hat{L}_x\right]+\left[\hat{L}_y^2,\hat{L}_x\right]+\left[\hat{L}_z^2,\hat{L}_x\right]\\
+    &=\hat{L}_y\left[\hat{L}_y,\hat{L}_x\right]+\left[\hat{L}_y,\hat{L}_x\right]\hat{L}_y+\hat{L}_z\left[\hat{L}_z,\hat{L}_x\right]+\left[\hat{L}_z,\hat{L}_x\right]\hat{L}_z\\
+    &=\hat{L}_y\left(-\i\hbar\hat{L}_z\right)+\left(-\i\hbar\hat{L}_z\right)\hat{L}_y+\hat{L}_z\left(\i\hbar\hat{L}_y\right)+\left(\i\hbar\hat{L}_y\right)\hat{L}_z\\
+    &=\mbf0
+\end{aligned}\]
+因此有
+\[\left[\hat{L}^2,\vec{L}\right]=\mbf0\]
+\indent 既然它们是对易的,因此也就拥有共同的本征态(这里以$\hat{L}_z$为例):
+\[\hat{L}^2\psi=\lambda\psi,\quad\hat{L}_z\psi=\mu\psi\]
+根据我们用阶梯法求解谐振子模型的经验,定义升降算符
+\[\hat{L}_{\pm}=\hat{L}_x\pm\i\hat{L}_y\]
+则有$\left[\hat{L}^2,\hat{L}_{\pm}\right]=0$.于是有
+\[\hat{L}^2(\hat{L}_\pm\psi)=\hat{L}_\pm(\hat{L}^2\psi)=\hat{L}_\pm\lambda\psi=\lambda(\hat{L}_\pm\psi)\]
+因此, $\hat{L}_\pm\psi$与$\psi$都是$\hat{L}^2$的属于本征值$\lambda$的函数.而对于$\hat{L}_z$而言有
+\[\left[\hat{L}_z,\hat{L}_{\pm}\right]=\left[\hat{L}_z,\hat{L}_x\right]\pm\i\left[\hat{L}_z,\hat{L}_y\right]=\pm\hbar\left(\hat{L}_x\pm\i\hat{L}\right)=\pm\hbar\hat{L}_{\pm}\]
+于是
+\[\hat{L}_z\left(\hat{L}_{\pm}\psi\right)=\left[\hat{L}_z,\hat{L}_\pm\right]\psi+\hat{L}_\pm\hat{L}_z\psi=\pm\hbar\hat{L}_\pm\psi+\hat{L}_\pm(\mu\psi)=(\mu\pm\hbar)\left(\hat{L}_\pm\psi\right)\]
+因此, $\hat{L}_\pm\psi$是$\hat{L}_z$的属于本征值$\mu\pm\hbar$的本征函数.\\
+\indent 于是,对于给定的$\lambda$值,我们得到一个状态阶梯,每个横档间隔一个单位$\hbar$.这一阶梯是有范围的,因为$z$分量不能超过总的角动量.一定存在一个顶横档$\psi_t$使得
+\[\hat{L}_+\psi_t=0\]
+假定$\hbar\ell$是顶横档的本征值,则有
+\[\hat{L}_z\psi_t=\hbar\ell\psi_t,\quad\hat{L}^2\psi_t=\lambda\psi_t\]
+而
+\[\hat{L}_{\pm}\hat{L}_{\mp}=\hat{L}_x^2+\hat{L}_y^2\mp\i\left[\hat{L}_x,\hat{L}_y\right]=\hat{L}^2-\hat{L}_z^2\pm\hbar\hat{L}_z\]
+由此可知
+\[\hat{L}^2\psi_t=\left(\hat{L}_-\hat{L}_++\hat{L}_z^2+\hbar\hat{L}_z\right)\psi_t=\left(0+\hbar^2\ell^2+\hbar^2\ell\right)=\hbar^2\ell(\ell+1)\psi_t\]
+所以
+\[\lambda=\hbar^2\ell(\ell+1)\]
+这也告诉我们$\hat{L}^2$的本征值就是$\hat{L}_z$的最大的本征值.类似地,最低横档对应的波函数$\psi_b$满足
+\[\hat{L}^2\psi_b=\hbar^2\ell^\ast\left(\ell^\ast-1\right)\psi_b\]
+所以
+\[\lambda=\hbar^2\ell^\ast\left(\ell^\ast-1\right)\]
+这就要求$\ell^\ast=\ell+1$(这是荒谬的,因为最低横档不能比最高横档还要高)或$\ell^\ast=-\ell$.\\
+\indent 因此, $\hat{L}_z$的本征值是$m\hbar$,其中$m$从$-\ell$增加到$\ell$.这样, $\ell$必须是一个整数或半整数. $\hat{L}^2$和$\hat{L}_z$的本征函数可由$\ell$和$m$作为指标:
+\[\hat{L}^2\psi_\ell^m=\hbar^2\ell(\ell+1)\psi_{\ell}^m,\quad\hat{L}_z\psi_\ell^m=\hbar m\psi_\ell^m\]
+其中
+\[\ell=0,\dfrac12,1,\dfrac32,\cdots;\quad m=-\ell,-\ell+1,\cdots,\ell-1,\ell\]
+\subsubsection{本征函数}
+我们通过一些代数变换在避免求出角动量的本征函数的情况下求出了角动量的本征值.不过,求出本征函数仍然需要一些努力.在球坐标系中梯度算符为
+\[\nabla=\vec{r}\dfrac{\p}{\p r}+\symbf\theta\dfrac{1}{r}\dfrac{\p}{\p\theta}+\symbf\phi\dfrac{1}{r\sin\theta}\dfrac{\p}{\p\phi}\]
+于是(这里$\hat{r}=(x,y,z)$为位置矢量)
+\[\hat{L}=-\i\hbar\left(\hat{r}\times\nabla\right)\xlongequal{\hat{r}=r\vec{r}}=-\i\hbar\left[r\left(\vec{r}\times\vec{r}\right)\dfrac{\p}{\p r}+\left(\vec{r}\times\symbf\theta\right)\dfrac{\p}{\p\theta}+\dfrac{1}{\sin\theta}\left(\vec{r}\times\symbf\phi\right)\dfrac{\p}{\p\phi}\right]\]
+而
+\[\vec{r}\times\vec{r}=\mbf0,\quad\vec{r}\times\symbf\theta=\symbf\phi,\quad\vec{r}\times\symbf\phi=\symbf\theta\]
+于是
+\[\hat{L}=-\i\hbar\left(\symbf\phi\dfrac{\p}{\p\theta}-\dfrac{\symbf\theta}{\sin\theta}\dfrac{\p}{\p\phi}\right)\]
+将$\symbf\theta$和$\symbf\phi$分解为直角坐标系中的基矢有
+\[\symbf\theta=\cos\theta\cos\phi\vec{i}+\cos\theta\sin\phi\vec{j}-\sin\theta\vec{k},\quad\symbf\phi=-\sin\phi\vec{i}+\cos\phi\vec{j}\]
+这样
+\[\hat{L}=\i\hbar\left[\left(-\sin\phi\vec{i}+\cos\phi\vec{j}\right)\dfrac{\p}{\p\theta}-\left(\cos\theta\cos\phi\vec{i}+\cos\theta\sin\phi\vec{j}-\sin\theta\vec{k}\right)\dfrac{1}{\sin\theta}\dfrac{\p}{\p\phi}\right]\]
+于是根据
+\[\hat{L}=\hat{L}_x\vec{i}+\hat{L}_y\vec{j}+\hat{L}_z\vec{k}\]
+可得
+\[\hat{L}_x=\i\hbar\left(\sin\phi\dfrac{\p}{\p\theta}+\cos\phi\cot\theta\dfrac{\p}{\p\phi}\right)\]
+\end{document}
