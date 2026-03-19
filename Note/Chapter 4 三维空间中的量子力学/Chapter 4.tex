@@ -195,9 +195,78 @@
 将$\symbf\theta$和$\symbf\phi$分解为直角坐标系中的基矢有
 \[\symbf\theta=\cos\theta\cos\phi\vec{i}+\cos\theta\sin\phi\vec{j}-\sin\theta\vec{k},\quad\symbf\phi=-\sin\phi\vec{i}+\cos\phi\vec{j}\]
 这样
-\[\hat{L}=\i\hbar\left[\left(-\sin\phi\vec{i}+\cos\phi\vec{j}\right)\dfrac{\p}{\p\theta}-\left(\cos\theta\cos\phi\vec{i}+\cos\theta\sin\phi\vec{j}-\sin\theta\vec{k}\right)\dfrac{1}{\sin\theta}\dfrac{\p}{\p\phi}\right]\]
+\[\hat{L}=-\i\hbar\left[\left(-\sin\phi\vec{i}+\cos\phi\vec{j}\right)\dfrac{\p}{\p\theta}-\left(\cos\theta\cos\phi\vec{i}+\cos\theta\sin\phi\vec{j}-\sin\theta\vec{k}\right)\dfrac{1}{\sin\theta}\dfrac{\p}{\p\phi}\right]\]
 于是根据
 \[\hat{L}=\hat{L}_x\vec{i}+\hat{L}_y\vec{j}+\hat{L}_z\vec{k}\]
 可得
 \[\hat{L}_x=\i\hbar\left(\sin\phi\dfrac{\p}{\p\theta}+\cos\phi\cot\theta\dfrac{\p}{\p\phi}\right)\]
+\[\hat{L}_y=-\i\hbar\left(\cos\phi\dfrac{\p}{\p\theta}-\sin\phi\cot\theta\dfrac{\p}{\p\phi}\right)\]
+\[\hat{L}_z=-\i\hbar\dfrac{\p}{\p\phi}\]
+\indent 同样地,升降算符定义为
+\[\hat{L}_{\pm}=\hat{L}_x\pm\hat{L}_y=-\i\hbar\left[\left(-\sin\phi\pm\i\cos\phi\right)\dfrac{\p}{\p\theta}-\left(\cos\phi\pm\i\sin\phi\right)\dfrac{\p}{\p\phi}\right]=\pm\e^{\pm\i\phi}\left(\dfrac{\p}{\p\theta}\pm\i\cot\theta\dfrac{\p}{\p\phi}\right)\]
+于是
+\[\hat{L}_+\hat{L}_-=-\hbar^2\left(\dfrac{\p^2}{\p\theta^2}+\cot\theta\dfrac{\p}{\p\theta}+\cot^2\theta\dfrac{\p^2}{\p\phi^2}+\i\dfrac{\p}{\p\phi}\right)\]
+于是
+\[\hat{L}^2=\hat{L}_+\hat{L}_-+\hat{L}_z^2-\hbar\hat{L}_z=-\hbar^2\left[\dfrac{1}{\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p}{\p\theta}\right)+\dfrac{1}{\sin^2\theta}\dfrac{\p^2}{\p\phi^2}\right]\]
+\indent 现在可以来确定波函数$f_\ell^m(\theta,\phi)$,它是$\hat{L}^2$的本征函数,本征值为$\hbar^2\ell(\ell+1)$,即
+\[\hat{L}^2f_\ell^m=-\hbar^2\left[\dfrac{1}{\sin\theta}\dfrac{\p}{\p\theta}\left(\sin\theta\dfrac{\p}{\p\theta}\right)+\dfrac{1}{\sin^2\theta}\dfrac{\p^2}{\p\phi^2}\right]f_\ell^m=\hbar^2\ell(\ell+1)f_\ell^m\]
+这正是角方程.我们在前面已经求得上述方程的解是经过适当归一化的球谐函数$Y_\ell^m$.同样地,在前一节我们已经知道$\hat{L}^2$的本征函数也是$\hat{L}_z$的本征函数.因此,球谐函数是$\hat{L}^2$和$\hat{L}_z$的本征函数.\\
+\indent 特别地,由于我们采用分离变量求解角方程,因此波函数地单值性要求$\ell$和$m$都是整数,但是用阶梯法求解角动量算符的本征值时则没有这样的要求.
+\subsection{自旋}
+在经典力学中,刚体具有两种角动量:轨道角动量$\vec{L}=\vec{r}\times\vec{p}$和自旋角动量$\vec{S}=I\symbf\omega$.对于基本粒子而言,自旋角动量不能通过经典的方式定义,但它的确是内禀的物理量.\\
+\indent 自旋代数理论是轨道角动量理论的翻版.与前面一致,有
+\[\hat{S}^2\ket{s\ m}=\hbar^2s(s+1)\ket{s\ m},\quad\hat{S}_z\ket{s\ m}=\hbar m\ket{s\ m}\]
+现在的本征函数不再是球谐函数,也就没有单值性的限制.于是,可行的取值为
+\[s=0,\dfrac12,1,\dfrac32,\cdots;\quad m=-s,-s+1,\cdots,s-1,s\]
+\indent 每个基本粒子都有\tbf{特定且不变}的$s$值,我们称之为粒子的\tbf{自旋}.例如, $\pi$介子的自旋为$0$,电子的自旋为$\dfrac12$,光子的自旋为$1$,等等.相比之下,轨道角动量量子数$l$可以取任意整数值,当系统发生变化时可能发生改变;但对于任何给定的粒子,自旋量子数$s$都是固定的,这也使得自旋理论相对简单一些.
+\subsubsection{自旋$1/2$}
+自旋为$\dfrac12$的粒子是比较重要的,因为组成物质的基本粒子(质子,中子和电子)以及左右夸克和轻子的自旋均为$\dfrac12$.\\
+\indent 自旋$\dfrac12$有两个本征态: $\ket{\dfrac12\ \dfrac12}$(称之为\tbf{自旋向上})和$\ket{\dfrac12\ -\dfrac12}$(称之为\tbf{自旋向下}).使用它们作为基矢,自旋$\dfrac12$粒子的状态可以用一个列向量(称之为\tbf{旋量})表示:
+\[\chi=\begin{bmatrix}
+    a\\b
+\end{bmatrix}=a\chi_++b\chi_-,\quad\chi_+=\begin{bmatrix}
+    1\\0
+\end{bmatrix},\quad\chi_-=\begin{bmatrix}
+    0\\1
+\end{bmatrix}\]
+其中$\chi_\pm$分别代表自旋向上和向下.\\
+\indent 在这一基组下,自旋算符是一个二阶矩阵$\mat{S}$.根据自旋算符的性质有
+\[\mat{S}^2\chi_+=\dfrac{3}{4}\hbar^2\chi_+,\quad\mat{S}^2\chi_-=\dfrac{3}{4}\hbar^2\chi_-\]
+这一矩阵方程的解为
+\[\mat{S}^2=\dfrac{3}{4}\hbar^2\begin{bmatrix}
+    1&0\\0&1
+\end{bmatrix}\]
+同样地由
+\[\mat{S}_z\chi_+=\dfrac12\hbar\chi_+,\quad\mat{S}_z\chi_-=-\dfrac12\hbar\chi_-\]
+可得
+\[\mat{S}_z=\dfrac12\hbar\begin{bmatrix}
+    1&0\\0&-1
+\end{bmatrix}\]
+同样地由
+\[\mat{S}_+\chi_-=\hbar\chi_+,\quad\mat{S}_-\chi_+=\hbar\chi_-,\quad\mat{S}_+\chi_+=\mat{S}_-\chi_-=\mbf0\]
+可得
+\[\mat{S}_+=\hbar\begin{bmatrix}
+    0&1\\0&0
+\end{bmatrix},\quad\mat{S}_-=\hbar\begin{bmatrix}
+    0&0\\1&0
+\end{bmatrix}\]
+再由$\mat{S}_\pm=\mat{S}_x\pm\i\mat{S}_y$可得
+\[\mat{S}_x=\dfrac12\hbar\begin{bmatrix}
+    0&1\\1&0
+\end{bmatrix},\quad\mat{S}_y=\dfrac12\hbar\begin{bmatrix}
+    0&-\i\\\i&0
+\end{bmatrix}\]
+\begin{definition}[泡利自旋矩阵]
+    泡利自旋矩阵定义为
+    \[\symbf\sigma_x=\begin{bmatrix}
+        0&1\\1&0
+    \end{bmatrix},\quad\symbf\sigma_y=\begin{bmatrix}
+        0&-\i\\\i&0
+    \end{bmatrix},\quad\symbf\sigma_z=\begin{bmatrix}
+        1&0\\0&-1
+    \end{bmatrix}\]
+\end{definition}
+这样,自旋矩阵即为$\mat{S}_u=\dfrac{1}{2}\hbar\symbf\sigma_u$,其中$u=x,y,z$.
+\subsubsection{自旋耦合}
+\subsection{电磁作用}
 \end{document}

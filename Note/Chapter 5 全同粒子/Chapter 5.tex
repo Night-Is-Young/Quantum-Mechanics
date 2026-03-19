@@ -1,0 +1,36 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{全同粒子}
+\subsection{双粒子体系}
+对单粒子而言, $\iPsi(\vec{r},t)$是空间坐标$\vec{r}$和时间$t$的函数,那么双粒子(以及多粒子)系统的状态则是所有粒子的坐标$\vec{r}_i$以及时间$t$的函数$\iPsi\left(\vec{r}_1,\cdots,\vec{r}_n,t\right)$,其演化方式也遵循薛定谔方程:
+\[\i\hbar\dfrac{\p\iPsi}{\p t}=\hat{H}\iPsi\]
+\indent 对于双粒子体系而言,哈密顿量
+\[\hat{H}=-\dfrac{\hbar^2}{2m_1}\nabla_1^2-\dfrac{\hbar^2}{2m_2}\nabla_2^2+V\left(\vec{r}_1,\vec{r}_2,t\right)\]
+这里$\nabla$的下标表示对粒子$1$或粒子$2$的坐标的微分.波函数的统计含义是显然的,即$\left|\iPsi\left(\vec{r}_1,\vec{r}_2,t\right)\right|^2$是在$\vec{r}_1$处发现粒子$1$,在$\vec{r}_2$处发现粒子$2$的概率密度函数;它也同样需要满足归一化条件.\\
+\indent 对于不含时的势函数,通过分离变量可以获得一组完备的解:
+\[\iPsi\left(\vec{r}_1,\vec{r}_2,t\right)=\psi\left(\vec{r}_1,\vec{r}_2\right)\exp\left(-\dfrac{\i Et}{\hbar}\right)\]
+其中空间波函数$\psi$满足定态薛定谔方程:
+\[-\dfrac{\hbar^2}{2m_1}\nabla_1^2\psi-\dfrac{\hbar^2}{2m_2}\nabla_2^2\psi+V\psi=E\psi\]
+这就是我们主要研究的问题.一般而言,上述方程是困难的,但有两种特殊情况可以把它转化为单粒子问题:
+\begin{enumerate}[label=\tbf{\arabic*.},leftmargin=*]
+    \item \tbf{无相互作用粒子}\ 假定两个粒子之间没有相互作用,因此势函数可以写作两者势能之和:
+    \[V\left(\vec{r}_1,\vec{r}_2\right)=V_1\left(\vec{r}_1\right)+V_2\left(\vec{r}_2\right)\]
+    对定态波函数进行变量分离:
+    \[\psi\left(\vec{r}_1,\vec{r}_2\right)=\psi_1\left(\vec{r}_1\right)\psi_2\left(\vec{r}_2\right)\]
+    这样可以将定态薛定谔方程改写为
+    \[-\dfrac{\hbar^2}{2m_i}\nabla_i^2\psi_i\left(\vec{r}_i\right)+V_i\left(\vec{r}_i\right)\psi_i\left(\vec{r}_i\right)=E_i\psi_i\left(\vec{r}_i\right),\quad i=1,2\]
+    并且$E=E_1+E_2$.在这种情况下,双粒子波函数是两个单粒子波函数的简单乘积:
+    \[\iPsi\left(\vec{r}_1,\vec{r}_2,t\right)=\iPsi_1\left(\vec{r}_1,t\right)\iPsi_2\left(\vec{r}_2,t\right)\]
+    另外,这些解的任何线性组合也是成立的解.例如:
+    \[\iPsi\left(\vec{r}_1,\vec{r}_2,t\right)=p_1\iPsi_{1,a}\left(\vec{r}_1,t\right)\iPsi_{2,b}\left(\vec{r}_2,t\right)+p_2\iPsi_{1,c}\left(\vec{r}_1,t\right)\iPsi_{2,d}\left(\vec{r}_2,t\right)\]
+    这时,测量粒子$1$的能量有$\left|p_1\right|^2$的概率得到$E_a$,此时粒子$2$的能量为$E_b$;也有$\left|p_2\right|^2$的概率得到$E_c$,此时粒子$2$的能量为$E_d$.两个粒子的状态是相互依赖的,我们称这两个粒子是\tbf{纠缠}的.纠缠态不能写作单粒子状态的乘积.
+    \item \tbf{中心势场}\ 如果粒子之间的相互作用仅限于二者之间,并且其相互作用的势仅取决于它们的距离,即
+    \[V\left(\vec{r}_1,\vec{r}_2\right)\to V\left(\left|\vec{r}_1-\vec{r}_2\right|\right)\]
+\end{enumerate}
+\end{document}
