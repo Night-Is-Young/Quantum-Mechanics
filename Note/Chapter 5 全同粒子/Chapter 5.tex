@@ -32,5 +32,40 @@
     这时,测量粒子$1$的能量有$\left|p_1\right|^2$的概率得到$E_a$,此时粒子$2$的能量为$E_b$;也有$\left|p_2\right|^2$的概率得到$E_c$,此时粒子$2$的能量为$E_d$.两个粒子的状态是相互依赖的,我们称这两个粒子是\tbf{纠缠}的.纠缠态不能写作单粒子状态的乘积.
     \item \tbf{中心势场}\ 如果粒子之间的相互作用仅限于二者之间,并且其相互作用的势仅取决于它们的距离,即
     \[V\left(\vec{r}_1,\vec{r}_2\right)\to V\left(\left|\vec{r}_1-\vec{r}_2\right|\right)\]
+    那么也可以把系统转化为无相互作用粒子.定义相对位移$\vec{r}=\vec{r}_1-\vec{r}_2$,质心位置$\vec{R}=\dfrac{m_1\vec{r}_1+m_2\vec{r}_2}{m_1+m_2}$和约化质量$\mu=\dfrac{m_1m_2}{m_1+m_2}$.
+    于是
+    \[\nabla_1=\dfrac{\p}{\p\vec{r}_1}=\dfrac{\p}{\p\vec{r}}\dfrac{\p\vec{r}}{\p\vec{r}_1}+\dfrac{\p}{\p\vec{R}}\dfrac{\p\vec{R}}{\p\vec{r}_1}=\nabla_r+\dfrac{\mu}{m_2}\nabla_R,\quad\nabla_2=-\nabla_r+\dfrac{\mu}{m_1}\nabla_R\]
+    这样就有
+    \[\dfrac{\hbar^2}{2m_1}\nabla_1^2+\dfrac{\hbar^2}{2m_2}\nabla_2^2=\dfrac{\hbar^2}{2}\left(\dfrac{\nabla_r^2}{m_1}+\dfrac{2\mu\nabla_r\nabla_R}{2m_1m_2}+\dfrac{\mu^2\nabla_R^2}{m_1m_2^2}+\dfrac{\nabla_r^2}{m_2}-\dfrac{2\mu\nabla_r\nabla_R}{2m_1m_2}+\dfrac{\mu^2\nabla_R^2}{m_1^2m_2}\right)=\dfrac{\hbar^2}{2}\left(\dfrac{\nabla_r^2}{\mu}+\dfrac{\nabla_R^2}{m_1+m_2}\right)\]
+    于是定态薛定谔方程可以改写为
+    \[-\dfrac{\hbar^2}{2\left(m_1+m_2\right)}\nabla_R^2\psi-\dfrac{\hbar^2}{2\mu}\nabla_r^2\psi+V(\vec{r})\psi=E\psi\]
+    分离变量,令
+    \[\psi\left(\vec{R},\vec{r}\right)=\psi_R(\vec{R})\psi_r(\vec{r})\]
+    注意到$\psi_R$满足总质量为$m_1+m_2$,势能为$0$,能量为$E_R$的单粒子薛定谔方程; $\psi_r$满足约化质量为$\mu$,势能为$V(\vec{r})$,能量为$E_r$的单粒子薛定谔方程.这告诉我们质心的运动可以看作一个自由粒子,而两个粒子的相对运动可以看作质量为约化质量的处于中心势场$V(\vec{r})$的单粒子的运动.
 \end{enumerate}
+\subsubsection{玻色子和费米子}
+重新审视我们通过变分法得到的波函数
+\[\psi\left(\vec{r}_1,\vec{r}_2\right)=\psi_1\left(\vec{r}_1\right)\psi_2\left(\vec{r}_2\right)\]
+这隐含了一个前提,即我们能够把粒子区分开;而实际上我们讨论的粒子是不可分的(即\tbf{全同}的).量子力学通过构造一个波函数来描述不可分的粒子:
+\[\psi_{\pm}\left(\vec{r}_1,\vec{r}_2\right)=A\left[\psi_a\left(\vec{r}_1\right)\psi_b\left(\vec{r}_2\right)\pm\psi_b\left(\vec{r}_1\right)\psi_a\left(\vec{r}_2\right)\right]\]
+这一理论将允许两种类型的全同粒子:\tbf{玻色子},上式取正号;\tbf{费米子},上式取符号.玻色子是交换对称的,即$\psi_+\left(\vec{r}_1,\vec{r}_2\right)=\psi_+\left(\vec{r}_2,\vec{r}_1\right)$;而费米子是交换反对称的,即$\psi_-\left(\vec{r}_1,\vec{r}_2\right)=-\psi_-\left(\vec{r}_2,\vec{r}_1\right)$.巧合的是,所有自旋为整数的粒子都是玻色子,而所有自旋为半整数的粒子都是费米子(可以用相对论量子力学进行证明,这里不进行过多讨论).\\
+\indent 由上面的构造可以得到一个著名的原理:
+\begin{theorem}[泡利不相容原理]
+    相同的费米子不能占据相同的状态.
+\end{theorem}
+\noindent 如果两个费米子处于相同的状态,那么$\psi_-\left(\vec{r}_1,\vec{r}_2\right)=A\left[\psi_a\left(\vec{r}_1\right)\psi_a\left(\vec{r}_2\right)-\psi_a\left(\vec{r}_1\right)\psi_a\left(\vec{r}_2\right)\right]=0$,这是没有意义的波函数,因而也不被允许.
+\subsubsection{交换力}
+粒子的交换对称性将影响它们作用的方式.我们从一个简单的问题来探究前述两种粒子的区别.
+\begin{problem}
+    给定归一化的一维波函数$\psi_a$, $\psi_b$分别代表$a$, $b$两种状态.计算两个全同的玻色子/费米子的距离平方的期望值$\avg{\left(x_1-x_2\right)^2}$.
+\end{problem}
+\begin{solution}
+首先,容易证明两种情况的波函数分别为
+\[\psi_+=\dfrac{1}{\sqrt{2}}\left[\psi_a\left(x_1\right)\psi_b\left(x_2\right)+\psi_b\left(x_1\right)\psi_a\left(x_2\right)\right]\]
+\[\psi_-=\dfrac{1}{\sqrt{2}}\left[\psi_a\left(x_1\right)\psi_b\left(x_2\right)-\psi_b\left(x_1\right)\psi_a\left(x_2\right)\right]\]
+因此
+\[\begin{aligned}
+    \avg{x_1^2}
+\end{aligned}\]
+\end{solution}
 \end{document}
