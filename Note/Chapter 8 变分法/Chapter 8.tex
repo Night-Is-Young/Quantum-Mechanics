@@ -1,0 +1,72 @@
+\documentclass{ctexart}
+\usepackage{Note}
+\usepackage{unicode-math}
+\setCJKmainfont[
+  BoldFont = 思源宋体 Bold,
+  ItalicFont = 楷体,
+]{宋体}
+\begin{document}
+\section{变分原理}
+\subsection{变分原理}
+设想我们需要计算由哈密顿量$\hat{H}$描述的系统的基态能量$E_{\text{gs}}$.通常,定态薛定谔方程难以直接求解,但我们可以用变分原理得到$E_{\text{gs}}$的上限:
+\begin{theorem}[变分原理]
+    任意选择归一化函数$\psi$,都有
+    \[E_{\text{gs}}\leq\bra\psi\hat{H}\ket\psi=\avg{H}\]
+\end{theorem}
+\begin{proof}
+    因为$\hat{H}$的本征函数构成一个完备集$\left\{\psi_n\right\}$,于是可以将$\psi$用这一基组展开:
+    \[\psi=\sum_{n}c_n\psi_n,\quad\hat{H}\psi_n=E_n\psi_n\]
+    由于$\psi$是归一化的,于是
+    \[1=\inprod\psi\psi=\inprod{\sum_{n}c_n\psi_n}{\sum_{m}c_m\psi_m}=\sum_{m}\sum_{n}c_m^\ast c_n\inprod{\psi_m}{\psi_n}=\sum_{n}\left|c_n\right|^2\]
+    与此同时
+    \[\avg{H}=\inprod{\sum_{n}c_n\psi_n}{\hat{H}\sum_{m}c_m\psi_m}=\sum_{n}E_n\left|c_n\right|^2\]
+    由定义可知,基态能量是最小的本征值,因此$E_{\text{gs}}\leq E_n$,于是
+    \[\avg{H}\geq E_{\text{gs}}\sum_{n}\left|c_n\right|^2=E_{\text{gs}}\]
+\end{proof}
+变分原理非常有用,并且使用起来也很简单.如果想要找到复杂体系(例如一些大分子)的基态能量,只需列出一个含有大量可调参数的尝试波函数,计算$\avg{H}$,就可以得到能量的可能的最小值并作为对$E_{\text{gs}}$的估计.当然,用这种方法并不能知道离真正的基态能量有多近;并且根据上面的证明过程可知,这种方法仅适用于基态问题.
+\subsection{氦原子的基态}
+氦原子的哈密顿算符为(忽略精细结构和较小的各类修正):
+\[\hat{H}=-\dfrac{\hbar^2}{2m}\left(\nabla_{\vec{r}_1}^2+\nabla_{\vec{r}_1}^2\right)-\dfrac{e^2}{4\pi\ep_0}\left(\dfrac{2}{r_1}+\dfrac{2}{r_2}-\dfrac{1}{\left|\vec{r}_1-\vec{r_2}\right|}\right)\]
+我们的问题是求解基态能量$E_{\text{gs}}$,其实验值为$\SI{-78.975}{\electronvolt}$.在数学上精确地求解上述三体问题是很难的,因此我们采用变分原理.如果忽略电子排斥项$V_{ee}=\dfrac{e^2}{4\pi\ep_0}\dfrac{1}{\left|\vec{r}_1-\vec{r}_2\right|}$,则$\hat{H}$可以被分离成两个独立的类氢原子($Z=2$)的哈密顿量,此时的体系精确解为
+\[\psi_0(\vec{r}_1,\vec{r}_2)=\psi_{1\text{s}}(\vec{r}_1)\psi_{1\text{s}}(\vec{r}_2)=\dfrac{8}{\pi a^3}\e^{-2(r_1+r_2)/a}\]
+$\psi_0$对应的能量为$\SI{-109}{\electronvolt}$.这不是一个很好的解,因此我们应用变分原理,将$\psi_0$作为尝试波函数.于是
+\[\hat{H}\psi_0=\left(8E_1+V_{ee}\right)\psi_0\]
+所以
+\[\avg{H}=8E_1+\avg{V_{ee}}\]
+其中
+\[\avg{V_{ee}}=\dfrac{e^2}{4\pi\ep_0}\left(\dfrac{8}{\pi a^3}\right)^2\int\dfrac{\e^{-4(r_1+r_2)/a}}{\left|\vec{r}_1-\vec{r}_2\right|}\d^3\vec{r}_1\d^3\vec{r}_2\]
+\indent 现在的目标是求解这一重积分.考虑到$\vec{r}_1$与$\vec{r}_2$的对称性,不妨先对$\vec{r}_2$积分,并取$\vec{r}_2$的极轴与$\vec{r}_1$重合.这样就有
+\[\left|\vec{r}_1-\vec{r}_2\right|=\sqrt{r_1^2+r_2^2-2r_1r_2\cos\theta_2}\]
+于是
+\[\begin{aligned}
+    \int\dfrac{\e^{-4(r_1+r_2)/a}}{\left|\vec{r}_1-\vec{r}_2\right|}\d^3\vec{r}_2
+    &=\int\dfrac{\e^{-4(r_1+r_2)/a}}{\sqrt{r_1^2+r_2^2-2r_1r_2\cos\theta_2}}\d^3\vec{r}_2\\
+    &=\int_0^{+\infty}\int_0^{\pi}\int_0^{2\pi}\dfrac{\e^{-4(r_1+r_2)/a}}{\sqrt{r_1^2+r_2^2-2r_1r_2\cos\theta_2}}r_2^2\sin\theta_2\d\phi_2\d\theta_2\d r_2\\
+    &=2\pi\int_0^{+\infty}\int_0^{\pi}\dfrac{\e^{-4(r_1+r_2)/a}}{\sqrt{r_1^2+r_2^2-2r_1r_2\cos\theta_2}}r_2^2\sin\theta_2\d\theta_2\d r_2\\
+    &=2\pi\int_0^{+\infty}\e^{-4(r_1+r_2)/a}\left(\left.\dfrac{\sqrt{r_1^2+r_2^2-2r_1r_2\cos\theta_2}}{r_1r_2}\right|_0^\pi\right)\d r_2\\
+    &=2\pi\int_0^{+\infty}\e^{-4(r_1+r_2)/a}\dfrac{(r_1+r_2)-\left|r_1-r_2\right|}{r_1r_2}\d r_2\\
+    &=4\pi\left[\int_0^{r_1}\dfrac{\e^{-4(r_1+r_2)/a}}{r_2}\d r_1+\int_{r_1}^{+\infty}\dfrac{\e^{-4(r_1+r_2)/a}}{r_1}\d r_1\right]\\
+    &=\dfrac{\pi a^3}{8r_1}\left[1-\left(1+\dfrac{2r_1}{a}\right)\e^{-4r_1/a}\right]\e^{-4r_1/a}
+\end{aligned}\]
+于是
+\[\begin{aligned}
+    \avg{V_{ee}}
+    &=\dfrac{e^2}{4\pi\ep_0}\dfrac{8}{\pi a^3}\cdot4\pi\int_0^{+\infty}\dfrac{1}{r_1}\left[1-\left(1+\dfrac{2r_1}{a}\right)\e^{-4r_1/a}\right]\e^{-4r_1/a}r_1^2\d r_1\\
+    &=\dfrac{8e^2}{\pi\ep_0 a^3}\int_0^{+\infty}\left[r_1\e^{-4r_1/a}+\left(r_1+\dfrac{2r_1^2}{a}\e^{-8r_1/a}\right)\right]\d r_1\\
+    &=\dfrac{8e^2}{\pi\ep_0 a^3}\dfrac{5a^2}{128}=\dfrac{5e^2}{16\pi\ep_0 a}=-\dfrac{5}{2}E_1=\SI{34}{\electronvolt}
+\end{aligned}\]
+这样
+\[\avg{H}=8E_1+\avg{V_{ee}}=\SI{-75}{\electronvolt}\]
+\indent 我们已经得到了一个比较好的结果,但还可以更进一步.考虑电子之间的屏蔽效应,采用中心力场法可得系统的哈密顿算符为
+\[\hat{H}=-\dfrac{\hbar^2}{2m_e}\left(\nabla_{\vec{r}_1}^2+\nabla_{\vec{r}_2}^2\right)-\dfrac{Ze^2}{4\pi\ep_0}\left(\dfrac{1}{r_1}+\dfrac{1}{r_2}\right)+\dfrac{e^2}{4\pi\ep_0}\left(\dfrac{Z-2}{r_1}+\dfrac{Z-2}{r_2}+\dfrac{1}{\left|\vec{r}_1-\vec{r}_2\right|}\right)\]
+其中$Z$为有效核电荷数.考虑屏壁作用后的尝试波函数为
+\[\psi(\vec{r}_1,\vec{r}_2)=\dfrac{Z^3}{\pi a^3}\e^{-Z(r_1+r_2)/a}\]
+于是容易得到
+\[\avg{H}=2Z^2E_1+2(Z-2)\dfrac{e^2}{4\pi\ep_0}\avg{\dfrac1r}+\avg{V_{ee}}\]
+而
+\[\avg{\dfrac1r}=\dfrac{Z}{a},\quad\avg{V_{ee}}=\dfrac{5Z}{8a}\dfrac{e^2}{4\pi\ep_0}=-\dfrac{5Z}{4}E_1\]
+于是
+\[\avg{H}=\left(-2Z^2+\dfrac{27}{4}Z\right)E_1\]
+\indent 按照变分原理, $E_{\text{gs}}$小于上式的最小值.令$\dfrac{\d\avg{H}}{\d Z}=0$可得
+\[Z=\dfrac{27}{16},\quad\avg{H}_{\min}=\SI{-77.5}{\electronvolt}\]
+\end{document}
